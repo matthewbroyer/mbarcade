@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>mbarcade.online: 8-Ball, Red/Black, Roulette & Cee-Lo</title>
+<meta name="description" content="mbarcade.online: four simple games in one page (8-Ball, Red or Black, Roulette and Cee-Lo). Free, no sign-up, no tracking. Your stats stay on your device.">
+<meta name="referrer" content="no-referrer">
+<!-- Everything runs from this one file, so block all network access and external loading. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+
+<!-- Always load light; use dark only if it was picked last time. Runs before first paint. -->
+<script>
+(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light')})();
+</script>
+<noscript><style>#loader{display:none!important}</style></noscript>
+
+<!-- iPhone home-screen icon + favicon (felt-teal badge with a die face) -->
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%228%22 fill=%22%230f766e%22/%3E%3Crect x=%2215%22 y=%2215%22 width=%2234%22 height=%2234%22 rx=%226%22 fill=%22none%22 stroke=%22%23fff%22 stroke-width=%223%22/%3E%3Ccircle cx=%2224%22 cy=%2224%22 r=%223%22 fill=%22%23fff%22/%3E%3Ccircle cx=%2240%22 cy=%2224%22 r=%223%22 fill=%22%23fff%22/%3E%3Ccircle cx=%2224%22 cy=%2240%22 r=%223%22 fill=%22%23fff%22/%3E%3Ccircle cx=%2240%22 cy=%2240%22 r=%223%22 fill=%22%23f2b640%22/%3E%3C/svg%3E" type="image/svg+xml">
+
+<style>
+/* ---- theme: "Utility" (Felt Teal) — neutral desktop-software palette, one teal accent, light + dark ---- */
+:root{
+color-scheme:light;
+--font:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;
+/* geometry: one radius for panels, one for controls */
+--r:6px; --r-sm:4px; --ctl:38px; --ctl-sm:32px; --ease:120ms ease;
+--bg:#f3f4f6; --surface:#ffffff; --surface-2:#f6f7f9; --surface-3:#eceef2; --ink:#1b1f24; --ink-2:#48505c; --muted:#5f6773;
+--border:#dfe2e7; --border-strong:#c6cbd3;
+--accent:#0f766e; --accent-hover:#0b5f58; --accent-ink:#ffffff; --accent-soft:rgba(15,118,110,.09); --accent-line:rgba(15,118,110,.38);
+--good:#16a34a; --good-ink:#0b7a35; --warn:#e5a100; --warn-ink:#8a5a00; --crit:#c9302c;
+--shadow:0 1px 2px rgba(20,24,31,.06);
+--shadow-pop:0 8px 24px -6px rgba(20,24,31,.22),0 1px 3px rgba(20,24,31,.08);
+--hover-band:rgba(20,24,31,.045);
+--accent-red:var(--crit); --accent-green:var(--good-ink);
+--piece-red:#c0392b; --piece-black:#1f2933; --piece-green:#1e7a46;
+}
+:root[data-theme="dark"]{
+color-scheme:dark;
+--bg:#16181c; --surface:#1e2126; --surface-2:#25292f; --surface-3:#2d3238; --ink:#e9ecf0; --ink-2:#b4bbc5; --muted:#8e97a3;
+--border:#30353c; --border-strong:#434a53;
+--accent:#3fbfae; --accent-hover:#63cfc1; --accent-ink:#06201d; --accent-soft:rgba(63,191,174,.13); --accent-line:rgba(63,191,174,.45);
+--good:#22c55e; --good-ink:#4ade80; --warn:#f0b429; --warn-ink:#f5c95c; --crit:#ff6b6b;
+--shadow:0 1px 2px rgba(0,0,0,.3);
+--shadow-pop:0 10px 28px -6px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03);
+--hover-band:rgba(255,255,255,.05);
+--piece-red:#c0392b; --piece-black:#2b3643; --piece-green:#1e7a46;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--font);font-size:14px;line-height:1.45;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+::selection{background:color-mix(in srgb,var(--accent) 28%,transparent)}
+h1,h2,h3{font-weight:600;letter-spacing:-.005em}
+button{font:inherit;color:inherit}
+.hidden{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.skip-link{position:absolute;left:12px;top:-64px;z-index:300;background:var(--accent);color:var(--accent-ink);padding:10px 16px;border-radius:var(--r-sm);font-weight:600;text-decoration:none}
+.skip-link:focus{top:12px}
+.wrap{width:100%;max-width:1000px;margin:0 auto;padding:0 16px}
+
+/* ---- header: solid app bar + underline tabs ---- */
+.top{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.top .wrap{display:flex;align-items:center;gap:8px;min-height:52px}
+.brand{display:flex;align-items:center;gap:9px;color:var(--ink);text-decoration:none;margin-right:6px;flex-shrink:0}
+.brand .logo{width:28px;height:28px;display:inline-flex;flex-shrink:0;line-height:0}
+.brand .logo svg{width:28px;height:28px;display:block}
+.brand .bt{display:flex;flex-direction:column;line-height:1.15}
+.brand b{font-size:14.5px;font-weight:650}
+.brand .bt span{font-size:11px;color:var(--muted);letter-spacing:.01em}
+nav.tabs{display:flex;align-self:stretch;gap:0}
+nav.tabs button{position:relative;border:0;border-radius:0;background:none;padding:0 12px;min-height:40px;color:var(--ink-2);font-weight:500;font-size:13.5px;cursor:pointer;transition:background-color var(--ease),color var(--ease)}
+nav.tabs button:hover{background:var(--surface-2);color:var(--ink)}
+nav.tabs button[aria-current="page"]{color:var(--accent);font-weight:600;box-shadow:inset 0 -2px 0 var(--accent)}
+nav.tabs button:focus-visible{outline-offset:-2px}
+.actions{display:flex;align-items:center;gap:6px;margin-left:auto}
+
+/* shared controls */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:var(--ctl);padding:0 14px;border-radius:var(--r-sm);font-weight:550;font-size:13.5px;background:var(--surface);border:1px solid var(--border-strong);color:var(--ink);cursor:pointer;text-decoration:none;transition:background-color var(--ease),border-color var(--ease),color var(--ease)}
+.btn:hover{background:var(--surface-2);border-color:color-mix(in srgb,var(--ink) 30%,var(--border-strong))}
+.btn:active{background:var(--surface-3)}
+.btn.sm{min-height:var(--ctl-sm);padding:0 10px;font-size:13px}
+.btn.lg{min-height:46px;font-size:14px}
+.btn.icon{padding:0;width:var(--ctl-sm)}
+.btn.primary,.btn.promote{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn.primary:hover,.btn.promote:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+.btn.danger{color:var(--crit);border-color:color-mix(in srgb,var(--crit) 45%,var(--border-strong))}
+.btn.danger:hover{background:color-mix(in srgb,var(--crit) 8%,var(--surface));border-color:var(--crit)}
+.btn:disabled,.btn:disabled:hover{background:var(--surface-2);border-color:var(--border);color:var(--muted);cursor:not-allowed;opacity:1}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+
+/* segmented chips (welcome screen) */
+.chips{display:flex}
+.chip{flex:1;min-height:var(--ctl);padding:0 12px;font-size:13.5px;font-weight:500;background:var(--surface);border:1px solid var(--border-strong);color:var(--ink-2);cursor:pointer;margin-left:-1px;transition:background-color var(--ease),border-color var(--ease),color var(--ease)}
+.chip:first-child{border-radius:var(--r-sm) 0 0 var(--r-sm);margin-left:0}
+.chip:last-child{border-radius:0 var(--r-sm) var(--r-sm) 0}
+.chip:hover{border-color:var(--accent);color:var(--ink);background:var(--surface-2)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600;position:relative;z-index:1}
+
+/* light/dark switch (shared component) */
+.themesw{border:0;background:none;padding:0;cursor:pointer;border-radius:var(--r-sm);display:inline-flex;align-items:center}
+.themesw .tk{position:relative;display:block;width:52px;height:26px;border:1px solid var(--border-strong);border-radius:var(--r-sm);background:var(--surface-3)}
+.themesw .th{position:absolute;left:2px;top:2px;width:22px;height:20px;border-radius:3px;background:var(--accent);transition:transform var(--ease)}
+.themesw[aria-checked="true"] .th{transform:translateX(24px)}
+
+/* "backed up last" chip */
+.bk-chip{display:inline-flex;align-items:center;gap:7px;min-height:var(--ctl-sm);padding:0 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface-2);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap}
+.bk-chip:hover{border-color:var(--border-strong);color:var(--ink)}
+.bk-chip i{width:8px;height:8px;border-radius:2px;background:var(--good);flex-shrink:0}
+.bk-chip.idle i{background:var(--border-strong)}
+.bk-chip.warn{color:var(--warn-ink);border-color:color-mix(in srgb,var(--warn) 55%,transparent);background:color-mix(in srgb,var(--warn) 14%,var(--surface))}
+.bk-chip.warn i{background:var(--warn)}
+.datawrap{position:relative}
+.datawrap .btn{position:relative}
+.datawrap .dot{position:absolute;top:-3px;right:-3px;width:9px;height:9px;border-radius:2px;background:var(--warn);border:1px solid var(--surface);display:none}
+.datawrap .dot.on{display:block}
+
+/* data menu */
+.dm-panel{position:fixed;z-index:150;right:8px;width:min(340px,calc(100vw - 16px));background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--r);box-shadow:var(--shadow-pop);padding:4px}
+.dm-item{display:flex;flex-direction:column;align-items:flex-start;gap:1px;width:100%;min-height:48px;padding:8px 12px;border:0;border-radius:var(--r-sm);background:none;text-align:left;cursor:pointer;justify-content:center}
+.dm-item:hover,.dm-item:focus-visible{background:var(--surface-2)}
+.dm-item:focus-visible{outline-offset:-2px}
+.dm-item .t{font-size:13.5px;font-weight:550;display:flex;justify-content:space-between;width:100%;align-items:center;gap:8px}
+.dm-item .s{font-size:12px;color:var(--muted)}
+.dm-item.primary .t{color:var(--accent);font-weight:650}
+.dm-item.danger .t{color:var(--crit)}
+kbd{font-family:var(--font);font-size:11px;font-weight:500;color:var(--muted);border:1px solid var(--border-strong);border-radius:3px;padding:0 5px;background:var(--surface-2)}
+.dm-sep{height:1px;background:var(--border);margin:4px 0}
+.dm-foot{padding:8px 12px 6px;font-size:12px;color:var(--muted);line-height:1.5;border-top:1px solid var(--border);margin-top:4px}
+.dm-foot b{color:var(--ink-2);font-weight:600}
+.linkbtn{border:0;background:none;padding:0;font-size:inherit;color:var(--accent);text-decoration:underline;cursor:pointer;min-height:24px}
+.linkbtn:hover{color:var(--accent-hover)}
+
+/* ---- page structure ---- */
+main.wrap{padding-top:20px;padding-bottom:36px;flex:1}
+main:focus{outline:none}
+.page-h{margin-bottom:14px}
+.page-h h2{font-size:22px;font-weight:650;letter-spacing:-.015em}
+.page-h p{font-size:13.5px;color:var(--muted)}
+.game-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px;align-items:start}
+.side{display:flex;flex-direction:column;gap:12px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);padding:16px}
+.panel h3{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+
+/* stage: where the game piece lives */
+.stage-box{width:100%;height:250px;display:flex;justify-content:center;align-items:center;position:relative;margin-bottom:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.status-bar{width:100%;min-height:40px;padding:6px 10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-sm)}
+.status-message{font-weight:600;font-size:14px;text-align:center;color:var(--ink)}
+.status-message.win{color:var(--good-ink)}
+.status-message.lose{color:var(--crit)}
+.controls-group{display:flex;flex-direction:column;gap:8px;width:100%}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.controls-group .btn{width:100%}
+.btn-red{background:var(--piece-red);border-color:var(--piece-red);color:#fff;font-weight:650;letter-spacing:.04em}
+.btn-red:hover{background:#a93226;border-color:#a93226}
+.btn-black{background:var(--piece-black);border-color:var(--piece-black);color:#fff;font-weight:650;letter-spacing:.04em}
+.btn-black:hover{background:#0f161d;border-color:#0f161d}
+.btn-red:disabled,.btn-black:disabled{background:var(--surface-2);border-color:var(--border);color:var(--muted)}
+.progress{height:6px;border-radius:2px;background:var(--surface-3);margin:-4px 0 12px;overflow:hidden}
+.progress>div{height:100%;width:0;background:var(--accent);transition:width var(--ease)}
+.game-note{margin-top:12px;font-size:12px;line-height:1.5;color:var(--muted)}
+
+/* stats */
+.stats-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat-box{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 6px;text-align:center;min-width:0}
+.stat-value{font-size:19px;font-weight:650;line-height:1.2;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.stat-label{font-size:11.5px;color:var(--muted);margin-top:2px}
+.datatable{width:100%;border-collapse:collapse;font-size:13px}
+.datatable th{text-align:left;font-weight:500;color:var(--ink-2);padding:6px 8px 6px 0;border-bottom:1px solid var(--border)}
+.datatable td{text-align:right;font-weight:600;padding:6px 0 6px 8px;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}
+.datatable tr:last-child th,.datatable tr:last-child td{border-bottom:0}
+.datatable tbody tr:hover{background:var(--hover-band)}
+.howto summary{min-height:36px;display:flex;align-items:center;cursor:pointer;font-size:13.5px;font-weight:600;color:var(--ink)}
+.howto ul{margin:6px 0 2px 18px;font-size:13px;line-height:1.7;color:var(--ink-2)}
+.howto.panel{padding:6px 16px}
+
+/* ---- game pieces (functional art: flat, no glow) ---- */
+.ball-container{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ball{width:200px;height:200px;border-radius:50%;position:relative;cursor:pointer;user-select:none;background:radial-gradient(circle at 30% 25%,#4a4a4a,#141414 32%,#000 80%);box-shadow:0 6px 18px rgba(0,0,0,.28),inset 20px 20px 40px rgba(255,255,255,.07),inset -20px -20px 40px rgba(0,0,0,.8);transition:box-shadow var(--ease)}
+.ball.glow{box-shadow:0 0 0 3px var(--accent-line),0 6px 18px rgba(0,0,0,.28),inset 20px 20px 40px rgba(255,255,255,.08),inset -20px -20px 40px rgba(0,0,0,.8)}
+.ball:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.ball.shake{animation:shake .6s ease-in-out}
+.center-window{position:absolute;width:48%;height:48%;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;justify-content:center;align-items:center;background:#fff;overflow:hidden;transition:background-color .3s ease;box-shadow:inset 0 0 8px rgba(0,0,0,.2)}
+.number{font-size:64px;font-weight:800;color:#111;transition:opacity .3s ease}
+.answer{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;text-align:center;padding:12px;color:var(--accent-ink);font-weight:700;font-size:13px;line-height:1.25;opacity:0;transition:opacity .3s ease}
+.revealed{background:var(--accent)}
+.revealed .number{opacity:0}
+.revealed .answer{opacity:1}
+
+.deck-stack{width:120px;height:175px;position:relative;border-radius:8px;background:#26323f;border:2px solid rgba(255,255,255,.18);margin-right:18px}
+.card-wrapper{width:120px;height:175px;perspective:1000px}
+.playcard{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .4s ease;border-radius:8px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.playcard.flipped{transform:rotateY(180deg)}
+.card-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;padding:10px;user-select:none}
+.card-back{background:#1f4d52;border:2px solid rgba(255,255,255,.25);justify-content:center;align-items:center}
+.card-back-inner{width:85%;height:88%;border:2px dashed rgba(255,255,255,.3);border-radius:5px;display:flex;justify-content:center;align-items:center;color:rgba(255,255,255,.45);font-size:22px}
+.card-front{background:#fff;transform:rotateY(180deg);border:1px solid #cfd4da}
+.card-front.red{color:#c62828}
+.card-front.black{color:#1b2430}
+.corner-rank{font-size:16px;font-weight:800;line-height:1;display:flex;flex-direction:column;align-items:center}
+.corner-rank.bottom{transform:rotate(180deg)}
+.center-suit{font-size:42px;align-self:center}
+
+.roulette-container{display:flex;flex-direction:column;align-items:center}
+.chamber-stage{position:relative;width:220px;height:220px;display:flex;justify-content:center;align-items:center}
+.hammer-indicator{position:absolute;top:-8px;width:20px;height:20px;background:var(--crit);clip-path:polygon(50% 100%,0 0,100% 0);z-index:10;transition:transform .1s ease}
+.hammer-indicator.strike{transform:translateY(6px) scale(1.2)}
+.cylinder-drum{width:196px;height:196px;border-radius:50%;background:radial-gradient(circle at center,#3a3f4d 0%,#1e222b 45%,#0d0f14 100%);border:5px solid #4a5263;box-shadow:0 6px 18px rgba(0,0,0,.35),inset 0 0 18px rgba(255,255,255,.1);position:relative;transition:transform 2.2s cubic-bezier(.12,.8,.25,1)}
+.cylinder-center{position:absolute;width:50px;height:50px;border-radius:50%;background:radial-gradient(circle,#6e7687,#1f2229);border:2px solid #111317;top:50%;left:50%;transform:translate(-50%,-50%);z-index:4}
+.chamber-hole{position:absolute;width:48px;height:48px;border-radius:50%;background:radial-gradient(circle at center,#050608 60%,#1a1d24 100%);border:2px solid #383e4d;top:50%;left:50%;margin-top:-24px;margin-left:-24px;display:flex;justify-content:center;align-items:center;box-shadow:inset 0 0 12px rgba(0,0,0,.9)}
+.primer{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe27a,#d4af37 60%,#8a6d1c 100%);border:2px solid #57440e;opacity:0;transition:opacity .3s ease}
+.chamber-hole.loaded .primer{opacity:1}
+.chamber-hole.spent .primer{background:radial-gradient(circle,#3a3a3a,#1a1a1a);border-color:#111;box-shadow:inset 0 0 6px #000}
+
+.ceelo-container{display:flex;flex-direction:column;align-items:center}
+.dice-stage{display:flex;justify-content:center;align-items:center;gap:18px;perspective:1000px}
+.die-scene{width:66px;height:66px;perspective:600px}
+.die-cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.85,.35,1.15)}
+.die-face{position:absolute;width:66px;height:66px;border-radius:8px;display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);padding:8px;backface-visibility:hidden;box-shadow:inset 0 0 8px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25)}
+.die-cube.red .die-face{background:var(--piece-red)}
+.die-cube.green .die-face{background:var(--piece-green)}
+.pip{width:11px;height:11px;background:#fff;border-radius:50%;justify-self:center;align-self:center;box-shadow:inset 0 1px 2px rgba(0,0,0,.5)}
+.face-1{transform:rotateY(0deg) translateZ(33px)}
+.face-2{transform:rotateY(90deg) translateZ(33px)}
+.face-3{transform:rotateX(-90deg) translateZ(33px)}
+.face-4{transform:rotateX(90deg) translateZ(33px)}
+.face-5{transform:rotateY(-90deg) translateZ(33px)}
+.face-6{transform:rotateY(180deg) translateZ(33px)}
+.die-scene.tumbling{animation:dieBounce .4s ease-in-out infinite alternate}
+@keyframes dieBounce{0%{transform:translateY(-10px) scale(1.04)}100%{transform:translateY(10px) scale(.96)}}
+@keyframes shake{0%{transform:translateX(0) rotate(0)}10%{transform:translateX(-18px) rotate(-6deg)}20%{transform:translateX(18px) rotate(6deg)}30%{transform:translateX(-18px) rotate(-6deg)}40%{transform:translateX(18px) rotate(6deg)}50%{transform:translateX(-12px) rotate(-4deg)}60%{transform:translateX(12px) rotate(4deg)}70%{transform:translateX(-8px) rotate(-2deg)}80%{transform:translateX(8px) rotate(2deg)}100%{transform:translateX(0) rotate(0)}}
+.flash-bang{animation:flashBangAnim .6s ease-out}
+@keyframes flashBangAnim{0%{background-color:rgba(201,48,44,.35)}100%{background-color:transparent}}
+
+/* ---- overlays: dialog, toast, undo ---- */
+dialog{margin:auto;width:calc(100% - 32px);max-width:440px;background:var(--surface);color:var(--ink);border:1px solid var(--border-strong);border-radius:8px;box-shadow:var(--shadow-pop);padding:20px}
+dialog::backdrop{background:rgba(10,12,16,.45)}
+dialog h3{font-size:17px;margin-bottom:8px}
+dialog p{font-size:13.5px;color:var(--ink-2);line-height:1.55;margin-bottom:10px}
+dialog .btns{display:flex;justify-content:flex-end;gap:8px;border-top:1px solid var(--border);padding-top:14px;margin-top:14px;flex-wrap:wrap}
+dialog .lbl{font-size:12.5px;font-weight:550;color:var(--ink-2);margin:12px 0 4px;display:block}
+.notes{max-height:min(60vh,420px);overflow:auto;padding-right:4px}
+.notes h4{font-size:14px;margin:12px 0 4px}
+.notes h4:first-child{margin-top:0}
+.notes h5{font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}
+.notes ul{margin:0 0 0 18px;font-size:13px;line-height:1.6;color:var(--ink-2)}
+dialog.wide{max-width:600px}
+.notes p{margin:0 0 6px}
+.notes .updated{font-size:12.5px;color:var(--muted);margin-bottom:4px}
+#pv-status{margin-top:8px;font-weight:600;color:var(--ink);font-size:13px}
+.toast{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:400;max-width:calc(100% - 32px);padding:9px 14px;border-radius:var(--r);background:var(--ink);color:var(--bg);font-size:13px;font-weight:550;box-shadow:var(--shadow-pop);opacity:0;visibility:hidden;transition:opacity var(--ease),visibility var(--ease);pointer-events:none}
+.toast.show{opacity:1;visibility:visible}
+.toast.err{background:var(--crit);color:#fff}
+#undo-bar{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:96;max-width:calc(100% - 100px);display:flex;align-items:center;gap:12px;background:var(--surface);color:var(--ink);border:1px solid var(--border-strong);border-left:3px solid var(--accent);border-radius:var(--r);padding:6px 6px 6px 14px;font-size:13px;font-weight:600;box-shadow:var(--shadow-pop)}
+#undo-bar button{min-height:40px;padding:0 16px;border:1px solid var(--accent);border-radius:var(--r-sm);background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:13px;cursor:pointer}
+#undo-bar button:hover{background:var(--accent-hover)}
+.totop{position:fixed;right:16px;bottom:16px;z-index:90;width:40px;height:40px;border-radius:var(--r);border:1px solid var(--border-strong);background:var(--surface);color:var(--ink);box-shadow:var(--shadow-pop);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity var(--ease),visibility var(--ease)}
+.totop.show{opacity:1;visibility:visible}
+.totop:hover{background:var(--surface-2)}
+.totop svg{width:18px;height:18px}
+
+/* ---- loader (scoped to #loader) ---- */
+#loader{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .15s ease,visibility .15s ease}
+#loader.done{opacity:0;visibility:hidden;pointer-events:none}
+#loader .sp-logo{width:52px;height:52px;line-height:0}
+#loader .sp-logo svg{width:52px;height:52px;display:block}
+#loader .sp-bar{width:120px;height:3px;border-radius:2px;background:var(--surface-3);overflow:hidden}
+#loader .sp-bar i{display:block;height:100%;width:0;background:var(--accent);animation:spfill .5s ease-out forwards}
+@keyframes spfill{to{width:100%}}
+
+/* ---- footer ---- */
+.site-footer{text-align:center;font-size:12px;color:var(--muted);padding:8px 16px 20px}
+.site-footer p{margin:0}
+.site-footer a,.site-footer .linkbtn{color:var(--muted);display:inline-block;padding:10px 6px;text-decoration:underline;font-size:12px}
+.site-footer a:hover,.site-footer .linkbtn:hover{color:var(--ink)}
+
+/* phone bottom nav */
+.bnav{display:none}
+
+/* ---- responsive ---- */
+@media(max-width:1100px){.brand .bt span{display:none}}
+@media(max-width:920px){
+nav.tabs{display:none}
+.top .wrap{min-height:48px}
+.bnav{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:100;background:var(--surface);border-top:1px solid var(--border-strong);padding-bottom:env(safe-area-inset-bottom)}
+.bnav button{border:0;background:none;min-height:54px;font-size:12.5px;font-weight:500;color:var(--ink-2);cursor:pointer}
+.bnav button[aria-current="page"]{color:var(--accent);font-weight:650;box-shadow:inset 0 2px 0 var(--accent)}
+.bnav button:focus-visible{outline-offset:-3px}
+body{padding-bottom:calc(58px + env(safe-area-inset-bottom))}
+#undo-bar{bottom:calc(70px + env(safe-area-inset-bottom))}
+.totop{bottom:calc(70px + env(safe-area-inset-bottom))}
+}
+@media(max-width:760px){
+.game-grid{grid-template-columns:1fr}
+}
+@media(pointer:coarse),(max-width:700px){
+:root{--ctl:44px;--ctl-sm:44px}
+.chip{min-height:44px}
+}
+@media(max-width:520px){
+.bk-chip{display:none}
+.datawrap .dot.on{display:block}
+.panel{padding:14px}
+.page-h h2{font-size:20px}
+.stage-box{height:230px}
+.ball{width:180px;height:180px}
+.deck-stack,.card-wrapper{width:105px;height:155px}
+.cylinder-drum{width:180px;height:180px}
+.die-scene,.die-face{width:58px;height:58px}
+.dice-stage{gap:12px}
+.face-1{transform:rotateY(0deg) translateZ(29px)}
+.face-2{transform:rotateY(90deg) translateZ(29px)}
+.face-3{transform:rotateX(-90deg) translateZ(29px)}
+.face-4{transform:rotateX(90deg) translateZ(29px)}
+.face-5{transform:rotateY(-90deg) translateZ(29px)}
+.face-6{transform:rotateY(180deg) translateZ(29px)}
+}
+@media(max-width:430px){.brand .bt{display:none}.top .wrap{flex-wrap:nowrap}}
+@media(min-width:521px){.datawrap .dot{display:none!important}}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+.flash-bang{animation:none!important}
+}
+@media print{
+#loader,.top,.bnav,.totop,.toast,#undo-bar,.skip-link,.controls-group{display:none!important}
+body{background:#fff!important;color:#000!important;display:block;padding:0}
+.panel{box-shadow:none;border-color:#999}
+.ball,.center-window,.card-face,.die-face{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+*{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Loading screen (hidden by script once the page has loaded) -->
+<div id="loader" role="status" aria-live="polite">
+    <div class="sp-logo" aria-hidden="true"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="8" fill="#0f766e"/><rect x="15" y="15" width="34" height="34" rx="6" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="3" fill="#fff"/><circle cx="40" cy="24" r="3" fill="#fff"/><circle cx="24" cy="40" r="3" fill="#fff"/><circle cx="40" cy="40" r="3" fill="#f2b640"/></svg></div>
+    <div class="sp-bar" aria-hidden="true"><i></i></div>
+    <span class="sr-only">Loading</span>
+</div>
+
+<header class="top">
+    <div class="wrap">
+        <a class="brand" href="#main" aria-label="mbarcade.online">
+            <span class="logo" aria-hidden="true"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="8" fill="#0f766e"/><rect x="15" y="15" width="34" height="34" rx="6" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="3" fill="#fff"/><circle cx="40" cy="24" r="3" fill="#fff"/><circle cx="24" cy="40" r="3" fill="#fff"/><circle cx="40" cy="40" r="3" fill="#f2b640"/></svg></span>
+            <span class="bt"><b>mbarcade.online</b><span>Four classic games</span></span>
+        </a>
+        <nav class="tabs" aria-label="Games">
+            <button type="button" id="btn-mode-8ball" data-mode="8ball" aria-current="page" onclick="switchMode('8ball')">8-Ball</button>
+            <button type="button" id="btn-mode-cards" data-mode="cards" onclick="switchMode('cards')">Red/Black</button>
+            <button type="button" id="btn-mode-roulette" data-mode="roulette" onclick="switchMode('roulette')">Roulette</button>
+            <button type="button" id="btn-mode-ceelo" data-mode="ceelo" onclick="switchMode('ceelo')">Cee-Lo</button>
+        </nav>
+        <div class="actions">
+            <button type="button" class="bk-chip idle" id="bk-chip" title="Save backup now"><i aria-hidden="true"></i><span id="bk-text">No backup yet</span></button>
+            <div class="datawrap">
+                <button type="button" class="btn sm" id="data-btn" aria-haspopup="menu" aria-expanded="false" aria-controls="data-menu">Data
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <i class="dot" id="data-dot" aria-hidden="true"></i>
+            </div>
+            <button type="button" class="btn sm icon" id="sound-toggle" aria-pressed="false" aria-label="Turn sound off"></button>
+            <button type="button" class="themesw" id="theme-toggle" role="switch" aria-checked="false" aria-label="Dark mode"><span class="tk"><span class="th"></span></span></button>
+        </div>
+    </div>
+</header>
+
+<!-- Data menu: backups and import/export -->
+<div class="dm-panel hidden" id="data-menu" role="menu" aria-label="Data">
+    <button type="button" class="dm-item primary" role="menuitem" data-act="save"><span class="t">Save backup now <kbd>Ctrl S</kbd></span><span class="s">Overwrites your backup file in one click</span></button>
+    <button type="button" class="dm-item" role="menuitem" data-act="export-json"><span class="t">Export All (JSON)…</span><span class="s">Full backup. You choose where it goes</span></button>
+    <button type="button" class="dm-item" role="menuitem" data-act="import"><span class="t">Import Backup (JSON)…</span><span class="s">Restore stats from a backup file</span></button>
+    <button type="button" class="dm-item" role="menuitem" data-act="export-csv"><span class="t">Export All (CSV)…</span><span class="s">Every stat, for Excel or Sheets</span></button>
+    <div class="dm-sep" role="separator"></div>
+    <button type="button" class="dm-item danger" role="menuitem" data-act="clear"><span class="t">Clear all data…</span><span class="s">Erase all-time stats and the saved backup location</span></button>
+    <div class="dm-foot" id="dm-foot"></div>
+</div>
+<input type="file" id="import-file" accept=".json,application/json" class="hidden" tabindex="-1" aria-hidden="true">
+
+<main class="wrap" id="main" tabindex="-1">
+    <h1 class="sr-only">mbarcade.online</h1>
+
+    <!-- VIEW 1: 8-BALL -->
+    <section class="app-view" id="view-8ball" aria-labelledby="h-8ball">
+        <div class="page-h"><h2 id="h-8ball">8-Ball</h2><p>Ask a yes/no question, then tap the ball or the button.</p></div>
+        <div class="game-grid">
+            <div class="panel play">
+                <div class="stage-box">
+                    <div class="ball-container">
+                        <div class="ball" id="ball" role="button" tabindex="0" aria-label="Shake the 8-ball">
+                            <div class="center-window" id="window">
+                                <div class="number">8</div>
+                                <div class="answer" id="answer" aria-live="polite"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="status-bar"><div class="status-message" id="8ball-status" aria-live="polite">Tap the ball for your answer</div></div>
+                <div class="controls-group">
+                    <button class="btn lg primary" type="button" onclick="shakeBall()">Ask 8-Ball</button>
+                </div>
+            </div>
+            <div class="side">
+                <div class="panel">
+                    <h3>This session</h3>
+                    <div class="stats-panel">
+                        <div class="stat-box"><div class="stat-value" id="stat-8ball-count">0</div><div class="stat-label">Questions</div></div>
+                        <div class="stat-box"><div class="stat-value" id="stat-8ball-last">-</div><div class="stat-label">Last Sentiment</div></div>
+                        <div class="stat-box"><div class="stat-value" id="stat-8ball-streak">0</div><div class="stat-label">Yes Streak</div></div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>All-time on this device</h3>
+                    <table class="datatable" aria-label="All-time 8-Ball stats"><tbody>
+                        <tr><th scope="row">Questions asked</th><td data-stat="ball.questions">0</td></tr>
+                        <tr><th scope="row">Positive answers</th><td data-stat="ball.yes">0</td></tr>
+                        <tr><th scope="row">Neutral answers</th><td data-stat="ball.maybe">0</td></tr>
+                        <tr><th scope="row">Negative answers</th><td data-stat="ball.no">0</td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIEW 2: RED OR BLACK GAME -->
+    <section class="app-view hidden" id="view-cards" aria-labelledby="h-cards">
+        <div class="page-h"><h2 id="h-cards">Red/Black</h2><p>Guess the color of the next card. One 52-card deck, no repeats.</p></div>
+        <div class="game-grid">
+            <div class="panel play">
+                <div class="stage-box">
+                    <div class="deck-stack" id="deck-visual"></div>
+                    <div class="card-wrapper">
+                        <div class="playcard" id="active-card">
+                            <div class="card-face card-back"><div class="card-back-inner">♠</div></div>
+                            <div class="card-face card-front" id="card-front">
+                                <div class="corner-rank"><span id="rank-top">A</span><span id="suit-top">♥</span></div>
+                                <div class="center-suit" id="suit-center">♥</div>
+                                <div class="corner-rank bottom"><span id="rank-bottom">A</span><span id="suit-bottom">♥</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="status-bar"><div class="status-message" id="game-status" aria-live="polite">Pick the next card's color</div></div>
+                <div class="progress" role="progressbar" aria-label="Deck progress" aria-valuemin="0" aria-valuemax="52" aria-valuenow="0"><div id="deck-progress"></div></div>
+                <div class="controls-group">
+                    <div class="btn-row">
+                        <button class="btn lg btn-red" type="button" id="btn-guess-red" onclick="makeGuess('red')">RED</button>
+                        <button class="btn lg btn-black" type="button" id="btn-guess-black" onclick="makeGuess('black')">BLACK</button>
+                    </div>
+                    <button class="btn" type="button" id="btn-reshuffle" onclick="resetAndShuffleDeck()">Reshuffle Deck</button>
+                </div>
+            </div>
+            <div class="side">
+                <div class="panel">
+                    <h3>This session</h3>
+                    <div class="stats-panel">
+                        <div class="stat-box"><div class="stat-value" id="stat-cards-left">52</div><div class="stat-label">Cards Left</div></div>
+                        <div class="stat-box"><div class="stat-value" id="stat-reds-left">26</div><div class="stat-label">Reds Left</div></div>
+                        <div class="stat-box"><div class="stat-value" id="stat-streak">0</div><div class="stat-label">Win Streak</div></div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>All-time on this device</h3>
+                    <table class="datatable" aria-label="All-time Red/Black stats"><tbody>
+                        <tr><th scope="row">Cards drawn</th><td data-stat="cards.draws">0</td></tr>
+                        <tr><th scope="row">Correct guesses</th><td data-stat="cards.correct">0</td></tr>
+                        <tr><th scope="row">Accuracy</th><td data-calc="cards.rate">-</td></tr>
+                        <tr><th scope="row">Best streak</th><td data-stat="cards.bestStreak">0</td></tr>
+                        <tr><th scope="row">Decks finished</th><td data-stat="cards.decks">0</td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIEW 3: ROULETTE -->
+    <section class="app-view hidden" id="view-roulette" aria-labelledby="h-roulette">
+        <div class="page-h"><h2 id="h-roulette">Roulette</h2><p>Spin the six-chamber cylinder and pull the trigger. One chamber is loaded.</p></div>
+        <div class="game-grid">
+            <div class="panel play">
+                <div class="stage-box">
+                    <div class="roulette-container">
+                        <div class="chamber-stage">
+                            <div class="hammer-indicator" id="hammer"></div>
+                            <div class="cylinder-drum" id="cylinder"><div class="cylinder-center"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="status-bar"><div class="status-message" id="roulette-status" aria-live="polite">Pull the trigger when ready</div></div>
+                <div class="controls-group">
+                    <button class="btn lg primary" type="button" id="btn-pull-trigger" onclick="pullTrigger()">PULL TRIGGER</button>
+                    <button class="btn" type="button" id="btn-reset-roulette" onclick="resetRoulette()">Reset and spin</button>
+                </div>
+                <p class="game-note">Simulation for entertainment only. If you are thinking about hurting yourself, call or text 988 (U.S.).</p>
+            </div>
+            <div class="side">
+                <div class="panel">
+                    <h3>This session</h3>
+                    <div class="stats-panel">
+                        <div class="stat-box"><div class="stat-value" id="stat-chambers-left">1 in 6</div><div class="stat-label">Odds per pull</div></div>
+                        <div class="stat-box"><div class="stat-value" id="stat-round-status">1 LIVE</div><div class="stat-label">Cylinder</div></div>
+                        <div class="stat-box"><div class="stat-value" id="stat-survived">0</div><div class="stat-label">Survived</div></div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>All-time on this device</h3>
+                    <table class="datatable" aria-label="All-time Roulette stats"><tbody>
+                        <tr><th scope="row">Trigger pulls</th><td data-stat="roulette.pulls">0</td></tr>
+                        <tr><th scope="row">Safe clicks</th><td data-stat="roulette.survived">0</td></tr>
+                        <tr><th scope="row">Bangs</th><td data-stat="roulette.bangs">0</td></tr>
+                        <tr><th scope="row">Longest run</th><td data-stat="roulette.bestRun">0</td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIEW 4: CEE-LO -->
+    <section class="app-view hidden" id="view-ceelo" aria-labelledby="h-ceelo">
+        <div class="page-h"><h2 id="h-ceelo">Cee-Lo</h2><p>Three dice. Roll for a win, a point, or a bust.</p></div>
+        <div class="game-grid">
+            <div class="panel play">
+                <div class="stage-box">
+                    <div class="ceelo-container">
+                        <div class="dice-stage">
+                            <div class="die-scene" id="die-scene-0"><div class="die-cube red" id="die-cube-0"></div></div>
+                            <div class="die-scene" id="die-scene-1"><div class="die-cube red" id="die-cube-1"></div></div>
+                            <div class="die-scene" id="die-scene-2"><div class="die-cube green" id="die-cube-2"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="status-bar"><div class="status-message" id="ceelo-status" aria-live="polite">Roll 3 dice to set your point</div></div>
+                <div class="controls-group">
+                    <button class="btn lg primary" type="button" id="btn-roll-ceelo" onclick="rollCeelo()">ROLL DICE</button>
+                    <button class="btn" type="button" onclick="resetCeeloStats()">Reset Stats</button>
+                </div>
+            </div>
+            <div class="side">
+                <div class="panel">
+                    <h3>This session</h3>
+                    <div class="stats-panel">
+                        <div class="stat-box"><div class="stat-value" id="stat-ceelo-rolls">0</div><div class="stat-label">Total Rolls</div></div>
+                        <div class="stat-box"><div class="stat-value" id="stat-ceelo-wins">0</div><div class="stat-label">Wins</div></div>
+                        <div class="stat-box"><div class="stat-value" id="stat-ceelo-best">-</div><div class="stat-label">Best Hand</div></div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>All-time on this device</h3>
+                    <table class="datatable" aria-label="All-time Cee-Lo stats"><tbody>
+                        <tr><th scope="row">Rolls</th><td data-stat="ceelo.rolls">0</td></tr>
+                        <tr><th scope="row">Wins (4-5-6 or trips)</th><td data-stat="ceelo.wins">0</td></tr>
+                        <tr><th scope="row">Points set</th><td data-stat="ceelo.points">0</td></tr>
+                        <tr><th scope="row">Busts (1-2-3)</th><td data-stat="ceelo.busts">0</td></tr>
+                        <tr><th scope="row">Best hand</th><td data-calc="ceelo.best">-</td></tr>
+                    </tbody></table>
+                </div>
+                <details class="howto panel">
+                    <summary>How to play</summary>
+                    <ul>
+                        <li>Roll three dice.</li>
+                        <li>4-5-6 or three of a kind wins.</li>
+                        <li>A pair plus one odd die sets your point (the odd die).</li>
+                        <li>1-2-3 loses. Anything else: roll again.</li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>Entertainment only. Random results, no real money or prizes, not advice. Stats and settings stay on this device.</p>
+    <p><button type="button" class="linkbtn" id="privacy-btn">Privacy</button> &middot; <button type="button" class="linkbtn" id="terms-btn">Terms</button> &middot; <button type="button" class="linkbtn" id="notes-btn">Release notes</button> &middot; v2.0 &middot; Updated <time datetime="2026-10-01">Oct 1, 2026</time></p>
+</footer>
+
+<nav class="bnav" aria-label="Games">
+    <button type="button" data-mode="8ball" aria-current="page" onclick="switchMode('8ball')">8-Ball</button>
+    <button type="button" data-mode="cards" onclick="switchMode('cards')">Red/Black</button>
+    <button type="button" data-mode="roulette" onclick="switchMode('roulette')">Roulette</button>
+    <button type="button" data-mode="ceelo" onclick="switchMode('ceelo')">Cee-Lo</button>
+</nav>
+
+<button class="totop" id="back-to-top" type="button" aria-label="Back to top" title="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Undo bar (shown briefly after a reset) -->
+<div id="undo-bar" class="hidden" role="status" aria-live="polite">
+    <span id="undo-msg"></span>
+    <button type="button" id="undo-btn">Undo</button>
+</div>
+
+<!-- Confirm dialog (clear data, replace stats, overwrite with empty) -->
+<dialog id="dlg-confirm" aria-labelledby="dc-title">
+    <h3 id="dc-title"></h3>
+    <p id="dc-body"></p>
+    <div class="btns">
+        <button type="button" class="btn" id="dc-cancel">Cancel</button>
+        <button type="button" class="btn primary" id="dc-ok">OK</button>
+    </div>
+</dialog>
+
+<!-- First-run welcome (shown once per browser) -->
+<dialog id="dlg-welcome" aria-labelledby="dw-title">
+    <h3 id="dw-title">Welcome to mbarcade.online</h3>
+    <p>Four quick games: 8-Ball, Red/Black, Roulette and Cee-Lo. No accounts, no ads, no tracking. Your all-time stats and settings are saved only on this device, so use <b>Data</b> to back them up.</p>
+    <span class="lbl" id="dw-theme-lbl">Appearance</span>
+    <div class="chips" role="group" aria-labelledby="dw-theme-lbl">
+        <button type="button" class="chip" id="dw-light" aria-pressed="true">Light</button>
+        <button type="button" class="chip" id="dw-dark" aria-pressed="false">Dark</button>
+    </div>
+    <p style="margin-top:12px">Already have a backup file? <button type="button" class="linkbtn" id="dw-import">Import it now</button>.</p>
+    <div class="btns"><button type="button" class="btn primary" id="dw-go">Start playing</button></div>
+</dialog>
+
+<!-- Release notes -->
+<dialog id="dlg-notes" aria-labelledby="dn-title">
+    <h3 id="dn-title">Release notes</h3>
+    <div class="notes">
+        <h4>v2.0 &middot; Oct 1, 2026</h4>
+        <h5>New</h5>
+        <ul>
+            <li>Renamed to <b>mbarcade.online</b>, with a new logo and a felt-teal accent.</li>
+            <li><b>Data menu</b> with Save backup now (Ctrl/Cmd+S), Export All (JSON), Import Backup (JSON) and Export All (CSV).</li>
+            <li>You choose where backups are saved. The location is remembered, and Save backup now overwrites that same file in one click (JSON is the main backup; the CSV refreshes too once you have saved one). Browsers without a file picker (Firefox, Safari, phones) download a dated file instead.</li>
+            <li>&ldquo;Backed up&rdquo; status next to the Data button, turning amber after 7 days or when you have stats but no backup.</li>
+            <li>All-time stats for every game, saved on this device and included in backups.</li>
+            <li>Short first-run welcome screen with a light/dark choice and an Import shortcut.</li>
+            <li>Two-column layout on desktop with a session panel, an all-time panel and a visible page title per game.</li>
+        </ul>
+        <h5>Changed</h5>
+        <ul>
+            <li>Loads in light mode by default and remembers dark if you picked it last time.</li>
+            <li>Utility look: system font, square panels, flat buttons, solid header with underline tabs, bottom navigation on phones.</li>
+            <li>Gradients, glow and glass effects removed from the interface (the 8-ball, cards, cylinder and dice keep their own look).</li>
+            <li>The storage notice is now part of the welcome screen instead of a banner.</li>
+            <li>The 8-ball can be focused and shaken from the keyboard.</li>
+            <li>Privacy and Terms now open inside the page (footer links) instead of separate pages. The Privacy text was updated to cover the saved stats, backups and a Clear saved data button.</li>
+        </ul>
+        <h5>Removed</h5>
+        <ul>
+            <li>Cookie banner, scroll-progress bar and the hamburger menu.</li>
+        </ul>
+        <h5>Unchanged</h5>
+        <ul>
+            <li>Game rules, odds, secure random numbers, sounds, undo, privacy (nothing leaves your device).</li>
+        </ul>
+    </div>
+    <div class="btns"><button type="button" class="btn primary" id="dn-close">Close</button></div>
+</dialog>
+
+<!-- Privacy -->
+<dialog id="dlg-privacy" class="wide" aria-labelledby="dp-title">
+    <h3 id="dp-title">Privacy</h3>
+    <div class="notes">
+        <p class="updated">Last updated October 1, 2026</p>
+        <h4>The short version</h4>
+        <p>This app does not ask for, collect or send any personal information. There are no accounts, forms, ads, analytics or cookies. Once the page has loaded, the app makes no further network requests.</p>
+        <h4>What is saved on your device</h4>
+        <p>The app uses your browser's local storage (and, if you use backups, IndexedDB) to remember the items below. They stay on your device and are never sent anywhere by the app.</p>
+        <ul>
+            <li><strong>theme</strong>: light or dark mode</li>
+            <li><strong>mode</strong>: the last game you opened</li>
+            <li><strong>sound</strong>: whether sound is on or off</li>
+            <li><strong>mbarcade.v1</strong>: your all-time game stats (plays, wins, streaks)</li>
+            <li><strong>mbarcade.lastBackup, mbarcade.fileJson, mbarcade.fileCsv</strong>: when you last saved a backup and the names of the backup files you chose</li>
+            <li><strong>mbarcade.onboarded</strong>: that you closed the welcome screen</li>
+            <li><strong>IndexedDB &ldquo;mbarcade&rdquo;</strong>: the remembered backup file locations, so Save backup now can overwrite the same file</li>
+        </ul>
+        <p>Per-session numbers (current streaks, cards left) live in memory only and reset when you close or reload the page.</p>
+        <h4>Backups you save</h4>
+        <p>Backup files (JSON or CSV) are written to the place you pick on your own device. The app never uploads them. If you store them in a synced folder, that service's own policy applies. The app can only see the file name, not the full folder path.</p>
+        <h4>What the app does not control</h4>
+        <p>Your browser requests this page from the website's host. Hosts commonly keep server logs, such as your IP address and the time of the request. The app cannot see those logs and does not add any tracking to them. Check the host's own policy if this matters to you.</p>
+        <h4>Clear saved data</h4>
+        <p>You can remove everything listed above. Backup files you saved yourself are not touched.</p>
+        <button type="button" class="btn danger" id="pv-clear">Clear saved data…</button>
+        <p id="pv-status" role="status"></p>
+        <h4>Children</h4>
+        <p>The app does not ask for personal information from anyone, including children.</p>
+        <h4>Changes</h4>
+        <p>If the app ever starts collecting or sending information, this page will be updated first and the date above will change.</p>
+    </div>
+    <div class="btns"><button type="button" class="btn primary" id="dp-close">Close</button></div>
+</dialog>
+
+<!-- Terms -->
+<dialog id="dlg-terms" class="wide" aria-labelledby="dt-title">
+    <h3 id="dt-title">Terms of Use</h3>
+    <div class="notes">
+        <p class="updated">Last updated October 1, 2026</p>
+        <h4>What this is</h4>
+        <p>A free set of four simple games: 8-Ball, Red or Black, Roulette and Cee-Lo. It is for entertainment only.</p>
+        <h4>No real money, no advice</h4>
+        <ul>
+            <li>No money, bets, prizes or rewards are involved.</li>
+            <li>Results are random. They are not predictions or advice, so please do not rely on them for any decision.</li>
+            <li>Roulette is a simulation. It is not meant to encourage violence or self-harm.</li>
+        </ul>
+        <h4>Please do not</h4>
+        <ul>
+            <li>Attack, overload or interfere with the site or its host.</li>
+            <li>Use the app to break the law.</li>
+            <li>Copy the app and present it as your own.</li>
+        </ul>
+        <h4>Ownership</h4>
+        <p>The app's design and code belong to its developer. You are welcome to play it for personal use.</p>
+        <h4>No guarantees</h4>
+        <p>The app is provided as is and as available, without promises that it will always work, be error-free or stay online. To the extent the law allows, the developer is not liable for losses from using it.</p>
+        <h4>Changes</h4>
+        <p>The app and these terms may change or end at any time. The date above shows the latest update. See also the <button type="button" class="linkbtn" id="terms-to-privacy">Privacy page</button>.</p>
+    </div>
+    <div class="btns"><button type="button" class="btn primary" id="dt-close">Close</button></div>
+</dialog>
+
+<script>
+/* ALL-TIME STATS (saved on this device; included in backups) */
+const Stats = (function () {
+    const KEY = 'mbarcade.v1';
+    const NUM = ['ball.questions', 'ball.yes', 'ball.maybe', 'ball.no',
+                 'cards.draws', 'cards.correct', 'cards.bestStreak', 'cards.decks',
+                 'roulette.pulls', 'roulette.survived', 'roulette.bangs', 'roulette.bestRun',
+                 'ceelo.rolls', 'ceelo.wins', 'ceelo.points', 'ceelo.busts'];
+    let d = load();
+    let onChange = null;
+
+    function blank() {
+        const o = { 'ceelo.bestRank': -1, 'ceelo.bestLabel': '' };
+        NUM.forEach(k => { o[k] = 0; });
+        return o;
+    }
+    function clean(src) {
+        const o = blank();
+        if (!src || typeof src !== 'object') return o;
+        NUM.forEach(k => {
+            const v = Number(src[k]);
+            if (isFinite(v) && v >= 0) o[k] = Math.min(Math.floor(v), 1e9);
+        });
+        const r = Number(src['ceelo.bestRank']);
+        if (isFinite(r) && r >= 0 && r <= 200) {
+            o['ceelo.bestRank'] = Math.floor(r);
+            o['ceelo.bestLabel'] = typeof src['ceelo.bestLabel'] === 'string' ? src['ceelo.bestLabel'].slice(0, 40) : '';
+        }
+        return o;
+    }
+    function load() {
+        try {
+            const raw = JSON.parse(localStorage.getItem(KEY));
+            return clean(raw && raw.stats);
+        } catch (e) { return blank(); }
+    }
+    function save() {
+        try { localStorage.setItem(KEY, JSON.stringify({ stats: d })); } catch (e) {}
+    }
+    function changed() {
+        save();
+        render();
+        if (onChange) onChange();
+    }
+    function render() {
+        document.querySelectorAll('[data-stat]').forEach(el => {
+            el.textContent = (d[el.dataset.stat] || 0).toLocaleString();
+        });
+        document.querySelectorAll('[data-calc]').forEach(el => {
+            const k = el.dataset.calc;
+            if (k === 'cards.rate') {
+                el.textContent = d['cards.draws'] ? Math.round(d['cards.correct'] / d['cards.draws'] * 100) + '%' : '-';
+            } else if (k === 'ceelo.best') {
+                el.textContent = d['ceelo.bestRank'] >= 0 ? d['ceelo.bestLabel'] : '-';
+            }
+        });
+    }
+    return {
+        add(k, n) { d[k] = Math.min((d[k] || 0) + (n || 1), 1e9); changed(); },
+        max(k, v) { if (v > (d[k] || 0)) { d[k] = v; changed(); } },
+        bestHand(rank, label) {
+            if (rank >= 0 && rank > d['ceelo.bestRank']) {
+                d['ceelo.bestRank'] = rank;
+                d['ceelo.bestLabel'] = String(label).slice(0, 40);
+                changed();
+            }
+        },
+        total() { return d['ball.questions'] + d['cards.draws'] + d['roulette.pulls'] + d['ceelo.rolls']; },
+        snapshot() { return JSON.parse(JSON.stringify(d)); },
+        clean: clean,
+        replace(src) { d = clean(src); changed(); },
+        clear() { d = blank(); changed(); },
+        render: render,
+        onChange(fn) { onChange = fn; }
+    };
+})();
+</script>
+
+<script>
+/* NAVIGATION MODE SWITCHER (header tabs + phone bottom nav share data-mode) */
+function switchMode(mode) {
+    const ids = ['8ball', 'cards', 'roulette', 'ceelo'];
+    if (ids.indexOf(mode) === -1) return;
+
+    ids.forEach(k => {
+        document.getElementById("view-" + k).classList.toggle("hidden", k !== mode);
+    });
+
+    document.querySelectorAll('[data-mode]').forEach(b => {
+        if (b.dataset.mode === mode) b.setAttribute('aria-current', 'page');
+        else b.removeAttribute('aria-current');
+    });
+
+    try { localStorage.setItem('mode', mode); } catch (e) {}
+}
+
+/* CRYPTO SECURE RANDOM GENERATOR */
+function secureRandom(max) {
+    const array = new Uint32Array(1);
+    crypto.getRandomValues(array);
+    return array[0] % max;
+}
+
+/* AUDIO SYNTHESIS ENGINE */
+let audioContext;
+let soundOn = true;
+try { soundOn = localStorage.getItem("sound") !== "off"; } catch (e) {}
+
+function getAudio() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioContext;
+}
+
+function playTone(frequency, duration, volume = 0.04, type = "triangle") {
+    if (!soundOn) return;
+    try {
+        const ctx = getAudio();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = type;
+        osc.frequency.value = frequency;
+        gain.gain.value = volume;
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        setTimeout(() => osc.stop(), duration);
+    } catch(e) {}
+}
+
+function playShakeSound() {
+    for (let i = 0; i < 7; i++) {
+        setTimeout(() => playTone(100 + Math.random() * 120, 35, 0.025), i * 65);
+    }
+}
+
+function playRevealSound() {
+    playTone(650, 120, 0.05);
+    setTimeout(() => playTone(950, 180, 0.05), 90);
+}
+
+function playFlipSound() {
+    playTone(300, 40, 0.03, "sine");
+    setTimeout(() => playTone(450, 60, 0.03, "sine"), 30);
+}
+
+function playWinSound() {
+    playTone(523.25, 80, 0.05);
+    setTimeout(() => playTone(659.25, 80, 0.05), 80);
+    setTimeout(() => playTone(783.99, 140, 0.05), 160);
+}
+
+function playLoseSound() {
+    playTone(220, 100, 0.05, "sawtooth");
+    setTimeout(() => playTone(180, 200, 0.05, "sawtooth"), 90);
+}
+
+function playChamberSpinSound(durationMs) {
+    const startTime = Date.now();
+    let interval = 40;
+
+    function click() {
+        const elapsed = Date.now() - startTime;
+        if (elapsed >= durationMs) return;
+
+        playTone(800 + Math.random() * 300, 12, 0.02, "sine");
+        interval *= 1.08;
+        setTimeout(click, interval);
+    }
+    click();
+}
+
+function playHammerClickSound() {
+    playTone(1200, 25, 0.06, "square");
+    setTimeout(() => playTone(400, 35, 0.05, "triangle"), 20);
+}
+
+function playEmptyClickSound() {
+    playTone(150, 60, 0.08, "triangle");
+    setTimeout(() => playTone(90, 80, 0.06, "sine"), 40);
+}
+
+function playBangSound() {
+    if (!soundOn) return;
+    try {
+        const ctx = getAudio();
+        const bufferSize = ctx.sampleRate * 0.7;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+
+        for (let i = 0; i < bufferSize; i++) {
+            data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.08));
+        }
+
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(160, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.5);
+
+        gain.gain.setValueAtTime(0.4, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+
+        noise.connect(gain);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        noise.start();
+        osc.start();
+        osc.stop(ctx.currentTime + 0.6);
+    } catch(e) {}
+}
+
+function playDiceRollSound() {
+    for (let i = 0; i < 12; i++) {
+        setTimeout(() => {
+            const freq = 180 + Math.random() * 350;
+            playTone(freq, 25, 0.04, "triangle");
+        }, i * (75 + Math.random() * 30));
+    }
+}
+
+/* ---------------- 8-BALL LOGIC ---------------- */
+const answers = [
+    { text: "It is certain", type: "Positive" },
+    { text: "It is decidedly so", type: "Positive" },
+    { text: "Without a doubt", type: "Positive" },
+    { text: "Yes definitely", type: "Positive" },
+    { text: "You may rely on it", type: "Positive" },
+    { text: "As I see it, yes", type: "Positive" },
+    { text: "Most likely", type: "Positive" },
+    { text: "Outlook good", type: "Positive" },
+    { text: "Yes", type: "Positive" },
+    { text: "Signs point to yes", type: "Positive" },
+    { text: "Reply hazy, try again", type: "Neutral" },
+    { text: "Ask again later", type: "Neutral" },
+    { text: "Better not tell you now", type: "Neutral" },
+    { text: "Cannot predict now", type: "Neutral" },
+    { text: "Concentrate and ask again", type: "Neutral" },
+    { text: "Don't count on it", type: "Negative" },
+    { text: "My reply is no", type: "Negative" },
+    { text: "My sources say no", type: "Negative" },
+    { text: "Outlook not so good", type: "Negative" },
+    { text: "Very doubtful", type: "Negative" }
+];
+
+const ball = document.getElementById("ball");
+const windowEl = document.getElementById("window");
+const answerEl = document.getElementById("answer");
+let shaking = false;
+let eightBallCount = 0;
+let eightBallYesStreak = 0;
+
+function shakeBall() {
+    if (shaking) return;
+    shaking = true;
+
+    windowEl.classList.remove("revealed");
+    ball.classList.remove("glow");
+
+    playShakeSound();
+    ball.classList.add("shake");
+
+    const status = document.getElementById("8ball-status");
+    status.textContent = "Shaking...";
+    status.className = "status-message";
+
+    setTimeout(() => {
+        const item = answers[secureRandom(answers.length)];
+        answerEl.textContent = item.text;
+
+        windowEl.classList.add("revealed");
+        ball.classList.add("glow");
+
+        playRevealSound();
+        ball.classList.remove("shake");
+        shaking = false;
+
+        eightBallCount++;
+        Stats.add('ball.questions');
+        Stats.add(item.type === "Positive" ? 'ball.yes' : item.type === "Negative" ? 'ball.no' : 'ball.maybe');
+        if (item.type === "Positive") {
+            eightBallYesStreak++;
+            status.textContent = "Looks good!";
+            status.className = "status-message win";
+        } else if (item.type === "Negative") {
+            eightBallYesStreak = 0;
+            status.textContent = "Not looking good";
+            status.className = "status-message lose";
+        } else {
+            status.textContent = "Unclear";
+            status.className = "status-message";
+        }
+
+        document.getElementById("stat-8ball-count").textContent = eightBallCount;
+        document.getElementById("stat-8ball-last").textContent = item.type;
+        document.getElementById("stat-8ball-streak").textContent = eightBallYesStreak;
+    }, 600);
+}
+
+ball.addEventListener("click", shakeBall);
+
+/* ---------------- RED OR BLACK CARD GAME LOGIC ---------------- */
+const SUITS = [
+    { symbol: '♥', color: 'red' },
+    { symbol: '♦', color: 'red' },
+    { symbol: '♠', color: 'black' },
+    { symbol: '♣', color: 'black' }
+];
+const RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
+let deck = [];
+let cardStreak = 0;
+let bestCardStreak = 0;
+let isCardAnimating = false;
+
+function buildDeck() {
+    deck = [];
+    for (const suit of SUITS) {
+        for (const rank of RANKS) {
+            deck.push({ rank, suit: suit.symbol, color: suit.color });
+        }
+    }
+}
+
+function shuffleDeck() {
+    for (let i = deck.length - 1; i > 0; i--) {
+        const j = secureRandom(i + 1);
+        [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+}
+
+function updateCardVisuals(card) {
+    const front = document.getElementById("card-front");
+    front.className = `card-face card-front ${card.color}`;
+
+    document.getElementById("rank-top").textContent = card.rank;
+    document.getElementById("suit-top").textContent = card.suit;
+    document.getElementById("suit-center").textContent = card.suit;
+    document.getElementById("rank-bottom").textContent = card.rank;
+    document.getElementById("suit-bottom").textContent = card.suit;
+}
+
+function updateCardHUD() {
+    const redCount = deck.filter(c => c.color === 'red').length;
+
+    document.getElementById("stat-cards-left").textContent = deck.length;
+    document.getElementById("stat-reds-left").textContent = redCount;
+    document.getElementById("stat-streak").textContent = cardStreak;
+
+    const deckVisual = document.getElementById("deck-visual");
+    const count = deck.length;
+    
+    if (count === 0) {
+        deckVisual.style.boxShadow = "none";
+        deckVisual.style.opacity = "0.2";
+    } else {
+        deckVisual.style.opacity = "1";
+        const depth = Math.ceil(count / 5);
+        let shadowCSS = [];
+        for (let i = 1; i <= depth; i++) {
+            shadowCSS.push(`-${i}px ${i}px 0px rgba(255,255,255,0.1)`);
+            shadowCSS.push(`-${i+1}px ${i+1}px 4px rgba(0,0,0,0.4)`);
+        }
+        deckVisual.style.boxShadow = shadowCSS.join(", ");
+    }
+
+    // Progress bar + end-of-deck: make "Play again" the primary action
+    const total = SUITS.length * RANKS.length;
+    document.getElementById("deck-progress").style.width = ((total - count) / total * 100) + "%";
+    document.getElementById("deck-progress").parentElement.setAttribute("aria-valuenow", total - count);
+    const reshuffleBtn = document.getElementById("btn-reshuffle");
+    reshuffleBtn.classList.toggle("promote", count === 0);
+    reshuffleBtn.textContent = count === 0 ? "Play again" : "Reshuffle Deck";
+
+    const buttonsDisabled = count === 0 || isCardAnimating;
+    document.getElementById("btn-guess-red").disabled = buttonsDisabled;
+    document.getElementById("btn-guess-black").disabled = buttonsDisabled;
+}
+
+function resetAndShuffleDeck() {
+    if (isCardAnimating) return;
+
+    const cardEl = document.getElementById("active-card");
+    const status = document.getElementById("game-status");
+
+    // Only offer Undo when there is progress to lose
+    const snap = deck.length < 52 ? {
+        deck: deck.slice(), streak: cardStreak, best: bestCardStreak,
+        flipped: cardEl.classList.contains("flipped"),
+        text: status.textContent, cls: status.className
+    } : null;
+
+    buildDeck();
+    shuffleDeck();
+    cardStreak = 0;
+    bestCardStreak = 0;
+
+    cardEl.classList.remove("flipped");
+    status.textContent = "Deck reshuffled. Pick a color";
+    status.className = "status-message";
+
+    updateCardHUD();
+    playShakeSound();
+
+    if (snap) {
+        showUndo("Deck reshuffled", function () {
+            deck = snap.deck;
+            cardStreak = snap.streak;
+            bestCardStreak = snap.best;
+            cardEl.classList.toggle("flipped", snap.flipped);
+            status.textContent = snap.text;
+            status.className = snap.cls;
+            updateCardHUD();
+        });
+    }
+}
+
+function makeGuess(guessColor) {
+    if (isCardAnimating || deck.length === 0) return;
+
+    isCardAnimating = true;
+    hideUndo();
+    const cardEl = document.getElementById("active-card");
+
+    const pending = document.getElementById("game-status");
+    pending.textContent = "Drawing...";
+    pending.className = "status-message";
+
+    if (cardEl.classList.contains("flipped")) {
+        cardEl.classList.remove("flipped");
+        setTimeout(() => executeDraw(guessColor), 200);
+    } else {
+        executeDraw(guessColor);
+    }
+}
+
+function executeDraw(guessColor) {
+    const cardEl = document.getElementById("active-card");
+    const status = document.getElementById("game-status");
+
+    const drawnCard = deck.pop();
+    updateCardVisuals(drawnCard);
+
+    playFlipSound();
+    cardEl.classList.add("flipped");
+
+    setTimeout(() => {
+        Stats.add('cards.draws');
+        if (drawnCard.color === guessColor) {
+            cardStreak++;
+            if (cardStreak > bestCardStreak) bestCardStreak = cardStreak;
+            Stats.add('cards.correct');
+            Stats.max('cards.bestStreak', cardStreak);
+            status.textContent = `Correct! ${drawnCard.rank} of ${drawnCard.suit}`;
+            status.className = "status-message win";
+            playWinSound();
+        } else {
+            cardStreak = 0;
+            status.textContent = `Wrong! ${drawnCard.rank} of ${drawnCard.suit}`;
+            status.className = "status-message lose";
+            playLoseSound();
+        }
+
+        if (deck.length === 0) {
+            Stats.add('cards.decks');
+            status.textContent = `Deck done! Best streak: ${bestCardStreak}`;
+            status.className = "status-message win";
+        }
+
+        isCardAnimating = false;
+        updateCardHUD();
+    }, 350);
+}
+
+/* ---------------- RUSSIAN ROULETTE LOGIC ---------------- */
+const CHAMBER_COUNT = 6;
+let bulletIndex = 0;
+let currentRotation = 0;
+let rouletteAnimating = false;
+let survivedCount = 0;
+let activeChambers = CHAMBER_COUNT;
+let gameOver = false;
+
+function initRouletteDOM() {
+    const cylinder = document.getElementById("cylinder");
+    const oldChambers = cylinder.querySelectorAll(".chamber-hole");
+    oldChambers.forEach(c => c.remove());
+
+    const radius = 64; 
+
+    for (let i = 0; i < CHAMBER_COUNT; i++) {
+        const hole = document.createElement("div");
+        hole.className = "chamber-hole";
+        hole.id = `chamber-${i}`;
+
+        const angle = (i * 60) * (Math.PI / 180);
+        const x = Math.sin(angle) * radius;
+        const y = -Math.cos(angle) * radius;
+
+        hole.style.transform = `translate(${x}px, ${y}px)`;
+
+        const primer = document.createElement("div");
+        primer.className = "primer";
+        hole.appendChild(primer);
+
+        cylinder.appendChild(hole);
+    }
+}
+
+function resetRoulette() {
+    if (rouletteAnimating) return;
+
+    bulletIndex = secureRandom(CHAMBER_COUNT);
+    survivedCount = 0;
+    activeChambers = CHAMBER_COUNT;
+    gameOver = false;
+    currentRotation = 0;
+
+    const cylinder = document.getElementById("cylinder");
+    cylinder.style.transition = "none";
+    cylinder.style.transform = `rotate(0deg)`;
+
+    for (let i = 0; i < CHAMBER_COUNT; i++) {
+        const chamber = document.getElementById(`chamber-${i}`);
+        chamber.className = "chamber-hole";
+    }
+
+    const status = document.getElementById("roulette-status");
+    status.textContent = "Cylinder spun. Pull the trigger.";
+    status.className = "status-message";
+
+    document.getElementById("btn-pull-trigger").disabled = false;
+    const resetBtn = document.getElementById("btn-reset-roulette");
+    resetBtn.classList.remove("promote");
+    resetBtn.textContent = "Reset and spin";
+    updateRouletteHUD();
+    playChamberSpinSound(600);
+}
+
+function updateRouletteHUD() {
+    document.getElementById("stat-chambers-left").textContent = "1 in " + CHAMBER_COUNT;
+    document.getElementById("stat-survived").textContent = survivedCount;
+    
+    const statusVal = document.getElementById("stat-round-status");
+    if (gameOver) {
+        statusVal.textContent = "BANG!";
+        statusVal.style.color = "var(--accent-red)";
+    } else {
+        statusVal.textContent = "1 LIVE";
+        statusVal.style.color = "var(--accent-green)";
+    }
+}
+
+function pullTrigger() {
+    if (rouletteAnimating || gameOver) return;
+
+    rouletteAnimating = true;
+    document.getElementById("btn-pull-trigger").disabled = true;
+
+    const status = document.getElementById("roulette-status");
+    status.textContent = "Spinning cylinder...";
+    status.className = "status-message";
+
+    const selectedChamber = secureRandom(CHAMBER_COUNT);
+    const extraSpins = (3 + secureRandom(3)) * 360;
+    const targetAngle = extraSpins + (360 - (selectedChamber * 60));
+
+    currentRotation += targetAngle;
+
+    const cylinder = document.getElementById("cylinder");
+    cylinder.style.transition = "transform 1.1s cubic-bezier(0.12, 0.8, 0.25, 1.0)";
+    cylinder.style.transform = `rotate(${currentRotation}deg)`;
+
+    playChamberSpinSound(1000);
+
+    setTimeout(() => {
+        const hammer = document.getElementById("hammer");
+        hammer.classList.add("strike");
+        playHammerClickSound();
+
+        setTimeout(() => {
+            hammer.classList.remove("strike");
+
+            const chamberEl = document.getElementById(`chamber-${selectedChamber}`);
+
+            if (selectedChamber === bulletIndex) {
+                gameOver = true;
+                Stats.add('roulette.pulls');
+                Stats.add('roulette.bangs');
+                Stats.max('roulette.bestRun', survivedCount);
+                chamberEl.classList.add("loaded", "spent");
+                playBangSound();
+
+                document.body.classList.add("flash-bang");
+                setTimeout(() => document.body.classList.remove("flash-bang"), 600);
+
+                status.textContent = `💥 BANG! Survived ${survivedCount}.`;
+                status.className = "status-message lose";
+                const again = document.getElementById("btn-reset-roulette");
+                again.classList.add("promote");
+                again.textContent = "Play again";
+            } else {
+                survivedCount++;
+                Stats.add('roulette.pulls');
+                Stats.add('roulette.survived');
+                Stats.max('roulette.bestRun', survivedCount);
+                activeChambers = Math.max(1, activeChambers - 1);
+                chamberEl.classList.add("spent");
+                playEmptyClickSound();
+
+                status.textContent = "*CLICK* Safe. Pull again.";
+                status.className = "status-message win";
+            }
+
+            rouletteAnimating = false;
+            if (!gameOver) {
+                document.getElementById("btn-pull-trigger").disabled = false;
+            }
+            updateRouletteHUD();
+
+        }, 200);
+
+    }, 1100);
+}
+
+/* ---------------- CEE-LO DICE GAME LOGIC ---------------- */
+const faceRotations = {
+    1: { x: 0, y: 0 },
+    2: { x: 0, y: -90 },
+    3: { x: 90, y: 0 },
+    4: { x: -90, y: 0 },
+    5: { x: 0, y: 90 },
+    6: { x: 0, y: 180 }
+};
+
+const facePips = {
+    1: [4],
+    2: [2, 6],
+    3: [2, 4, 6],
+    4: [0, 2, 6, 8],
+    5: [0, 2, 4, 6, 8],
+    6: [0, 2, 3, 5, 6, 8]
+};
+
+let ceeloTotalRolls = 0;
+let ceeloWins = 0;
+let ceeloBestRank = -1;
+let ceeloBestLabel = "-";
+let isCeeloRolling = false;
+
+function buildDiceFaceDOM(cubeEl) {
+    cubeEl.innerHTML = "";
+    for (let f = 1; f <= 6; f++) {
+        const face = document.createElement("div");
+        face.className = `die-face face-${f}`;
+
+        const activeIndices = facePips[f];
+        for (let p = 0; p < 9; p++) {
+            if (activeIndices.includes(p)) {
+                const pip = document.createElement("div");
+                pip.className = "pip";
+                face.appendChild(pip);
+            } else {
+                face.appendChild(document.createElement("div"));
+            }
+        }
+        cubeEl.appendChild(face);
+    }
+}
+
+function initCeeloDOM() {
+    buildDiceFaceDOM(document.getElementById("die-cube-0"));
+    buildDiceFaceDOM(document.getElementById("die-cube-1"));
+    buildDiceFaceDOM(document.getElementById("die-cube-2"));
+
+    setDieValue(0, 1, 0, 0);
+    setDieValue(1, 2, 0, 0);
+    setDieValue(2, 3, 0, 0);
+}
+
+function setDieValue(index, value, extraRotX = 0, extraRotY = 0) {
+    const cube = document.getElementById(`die-cube-${index}`);
+    const rot = faceRotations[value];
+    const finalX = rot.x + extraRotX;
+    const finalY = rot.y + extraRotY;
+
+    cube.style.transform = `rotateX(${finalX}deg) rotateY(${finalY}deg)`;
+}
+
+function evaluateCeelo(d1, d2, d3) {
+    const sorted = [d1, d2, d3].sort((a, b) => a - b);
+    const [a, b, c] = sorted;
+
+    if (a === 4 && b === 5 && c === 6) {
+        return { type: 'WIN', rank: 100, label: '4-5-6 (Auto)', desc: '🎉 4-5-6! Instant win.' };
+    }
+    if (a === b && b === c) {
+        return { type: 'WIN', rank: 80 + a, label: `Trips (${a}s)`, desc: `🔥 Trips! Three ${a}s` };
+    }
+    if (a === b && b !== c) {
+        return { type: 'POINT', rank: 10 + c, label: `Point ${c}`, desc: `🎲 Point is ${c}! (Pair of ${a}s)` };
+    }
+    if (b === c && a !== b) {
+        return { type: 'POINT', rank: 10 + a, label: `Point ${a}`, desc: `🎲 Point is ${a}! (Pair of ${b}s)` };
+    }
+    if (a === c && a !== b) {
+        return { type: 'POINT', rank: 10 + b, label: `Point ${b}`, desc: `🎲 Point is ${b}! (Pair of ${a}s)` };
+    }
+    if (a === 1 && b === 2 && c === 3) {
+        return { type: 'LOSE', rank: 0, label: '1-2-3 (Bust)', desc: '💩 1-2-3 bust. Automatic loss.' };
+    }
+    return { type: 'NONE', rank: -1, label: 'No Point', desc: '🔄 No point. Roll again.' };
+}
+
+function renderCeeloStats() {
+    document.getElementById("stat-ceelo-rolls").textContent = ceeloTotalRolls;
+    document.getElementById("stat-ceelo-wins").textContent = ceeloWins;
+    document.getElementById("stat-ceelo-best").textContent = ceeloBestLabel;
+}
+
+function rollCeelo() {
+    if (isCeeloRolling) return;
+    hideUndo();
+
+    isCeeloRolling = true;
+    document.getElementById("btn-roll-ceelo").disabled = true;
+
+    const status = document.getElementById("ceelo-status");
+    status.textContent = "Shaking dice...";
+    status.className = "status-message";
+
+    playDiceRollSound();
+
+    for (let i = 0; i < 3; i++) {
+        document.getElementById(`die-scene-${i}`).classList.add("tumbling");
+    }
+
+    const v1 = secureRandom(6) + 1;
+    const v2 = secureRandom(6) + 1;
+    const v3 = secureRandom(6) + 1;
+
+    const rotRotations = [
+        { x: (3 + secureRandom(2)) * 360, y: (3 + secureRandom(2)) * 360 },
+        { x: (3 + secureRandom(2)) * 360, y: (3 + secureRandom(2)) * 360 },
+        { x: (3 + secureRandom(2)) * 360, y: (3 + secureRandom(2)) * 360 }
+    ];
+
+    setDieValue(0, v1, rotRotations[0].x, rotRotations[0].y);
+    setDieValue(1, v2, rotRotations[1].x, rotRotations[1].y);
+    setDieValue(2, v3, rotRotations[2].x, rotRotations[2].y);
+
+    setTimeout(() => {
+        for (let i = 0; i < 3; i++) {
+            document.getElementById(`die-scene-${i}`).classList.remove("tumbling");
+        }
+
+        const res = evaluateCeelo(v1, v2, v3);
+        ceeloTotalRolls++;
+        Stats.add('ceelo.rolls');
+
+        if (res.type === 'WIN') {
+            ceeloWins++;
+            Stats.add('ceelo.wins');
+            playWinSound();
+            status.className = "status-message win";
+        } else if (res.type === 'POINT') {
+            Stats.add('ceelo.points');
+            playRevealSound();
+            status.className = "status-message win";
+        } else if (res.type === 'LOSE') {
+            Stats.add('ceelo.busts');
+            playLoseSound();
+            status.className = "status-message lose";
+        } else {
+            playFlipSound();
+            status.className = "status-message";
+        }
+
+        if (res.rank > ceeloBestRank) {
+            ceeloBestRank = res.rank;
+            ceeloBestLabel = res.label;
+        }
+
+        Stats.bestHand(res.rank, res.label);
+
+        status.textContent = res.desc;
+
+        document.getElementById("stat-ceelo-rolls").textContent = ceeloTotalRolls;
+        document.getElementById("stat-ceelo-wins").textContent = ceeloWins;
+        document.getElementById("stat-ceelo-best").textContent = ceeloBestLabel;
+
+        isCeeloRolling = false;
+        document.getElementById("btn-roll-ceelo").disabled = false;
+
+    }, 900);
+}
+
+function resetCeeloStats() {
+    if (isCeeloRolling) return;
+
+    const snap = { rolls: ceeloTotalRolls, wins: ceeloWins, rank: ceeloBestRank, label: ceeloBestLabel };
+
+    ceeloTotalRolls = 0;
+    ceeloWins = 0;
+    ceeloBestRank = -1;
+    ceeloBestLabel = "-";
+
+    document.getElementById("stat-ceelo-rolls").textContent = 0;
+    document.getElementById("stat-ceelo-wins").textContent = 0;
+    document.getElementById("stat-ceelo-best").textContent = "-";
+
+    const status = document.getElementById("ceelo-status");
+    status.textContent = "Stats reset. Roll 3 dice";
+    status.className = "status-message";
+
+    playShakeSound();
+
+    if (snap.rolls > 0) {
+        showUndo("Stats reset", function () {
+            ceeloTotalRolls = snap.rolls;
+            ceeloWins = snap.wins;
+            ceeloBestRank = snap.rank;
+            ceeloBestLabel = snap.label;
+            renderCeeloStats();
+            status.textContent = "Stats restored";
+            status.className = "status-message";
+        });
+    }
+}
+
+// INITIALIZE ALL GAMES ON LOAD
+buildDeck();
+shuffleDeck();
+updateCardHUD();
+
+initRouletteDOM();
+resetRoulette();
+
+initCeeloDOM();
+</script>
+
+<script>
+/* SITE CHROME: theme, sound, tabs, loader, undo, welcome, release notes */
+(function () {
+    var root = document.documentElement;
+    function $(id) { return document.getElementById(id); }
+    function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+    function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+    /* Theme (light unless dark was picked last time; the head script sets the first value) */
+    var themeBtn = $('theme-toggle');
+    function applyTheme(t) {
+        t = t === 'dark' ? 'dark' : 'light';
+        root.setAttribute('data-theme', t);
+        themeBtn.setAttribute('aria-checked', t === 'dark' ? 'true' : 'false');
+        $('dw-light').setAttribute('aria-pressed', t === 'light' ? 'true' : 'false');
+        $('dw-dark').setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
+    }
+    function setTheme(t) { applyTheme(t); safeSet('theme', root.getAttribute('data-theme')); }
+    applyTheme(root.getAttribute('data-theme'));
+    themeBtn.addEventListener('click', function () {
+        setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    /* Sound toggle (remembered on this device) */
+    var ICON_ON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+    var ICON_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6"/><path d="m21 9-5 6"/></svg>';
+    var soundBtn = $('sound-toggle');
+    function renderSound() {
+        soundBtn.innerHTML = soundOn ? ICON_ON : ICON_OFF;
+        soundBtn.setAttribute('aria-pressed', soundOn ? 'false' : 'true');
+        soundBtn.setAttribute('aria-label', soundOn ? 'Turn sound off' : 'Turn sound on');
+    }
+    renderSound();
+    soundBtn.addEventListener('click', function () {
+        soundOn = !soundOn;
+        safeSet('sound', soundOn ? 'on' : 'off');
+        renderSound();
+    });
+
+    /* Unlock audio on the first tap or key press (needed by iOS Safari and Chrome) */
+    function primeAudio() {
+        try { var c = getAudio(); if (c.state === 'suspended') c.resume(); } catch (e) {}
+    }
+    document.addEventListener('pointerdown', primeAudio, { once: true });
+    document.addEventListener('keydown', primeAudio, { once: true });
+
+    /* 8-ball from the keyboard */
+    $('ball').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); shakeBall(); }
+    });
+
+    /* Back to top */
+    var toTop = $('back-to-top');
+    var ticking = false;
+    function onScroll() { toTop.classList.toggle('show', window.scrollY > 300); ticking = false; }
+    window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+    }, { passive: true });
+    toTop.addEventListener('click', function () { window.scrollTo({ top: 0 }); });
+    onScroll();
+
+    /* Toast */
+    var toastEl = $('toast'), toastT;
+    window.toast = function (msg, isErr) {
+        toastEl.textContent = msg;
+        toastEl.className = 'toast show' + (isErr ? ' err' : '');
+        clearTimeout(toastT);
+        toastT = setTimeout(function () { toastEl.className = 'toast'; }, isErr ? 5000 : 3200);
+    };
+
+    /* Undo bar */
+    var undoBar = $('undo-bar'), undoMsg = $('undo-msg');
+    var undoFn = null, undoTimer = null;
+    window.hideUndo = function () {
+        undoBar.classList.add('hidden');
+        undoFn = null;
+        clearTimeout(undoTimer);
+    };
+    window.showUndo = function (msg, fn) {
+        undoMsg.textContent = msg;
+        undoFn = fn;
+        undoBar.classList.remove('hidden');
+        clearTimeout(undoTimer);
+        undoTimer = setTimeout(window.hideUndo, 7000);
+    };
+    $('undo-btn').addEventListener('click', function () {
+        var f = undoFn;
+        window.hideUndo();
+        if (f) f();
+    });
+
+    /* Confirm dialog (promise based) */
+    var dlgC = $('dlg-confirm');
+    window.askConfirm = function (o) {
+        return new Promise(function (resolve) {
+            $('dc-title').textContent = o.title;
+            $('dc-body').textContent = o.body;
+            var ok = $('dc-ok');
+            ok.textContent = o.ok;
+            ok.className = 'btn ' + (o.danger ? 'danger' : 'primary');
+            dlgC.returnValue = '';
+            function done() { dlgC.removeEventListener('close', done); resolve(dlgC.returnValue === 'ok'); }
+            dlgC.addEventListener('close', done);
+            dlgC.showModal();
+        });
+    };
+    $('dc-ok').addEventListener('click', function () { dlgC.close('ok'); });
+    $('dc-cancel').addEventListener('click', function () { dlgC.close('cancel'); });
+
+    /* Release notes */
+    var dlgN = $('dlg-notes');
+    $('notes-btn').addEventListener('click', function () { dlgN.showModal(); });
+    $('dn-close').addEventListener('click', function () { dlgN.close(); });
+
+    /* Reopen the last game played */
+    var savedMode = safeGet('mode');
+    if (/^(8ball|cards|roulette|ceelo)$/.test(savedMode || '')) switchMode(savedMode);
+
+    /* First-run welcome (once per browser) */
+    var dlgW = $('dlg-welcome');
+    $('dw-light').addEventListener('click', function () { setTheme('light'); });
+    $('dw-dark').addEventListener('click', function () { setTheme('dark'); });
+    function closeWelcome() { safeSet('mbarcade.onboarded', '1'); }
+    dlgW.addEventListener('close', closeWelcome);
+    $('dw-go').addEventListener('click', function () { dlgW.close(); });
+    $('dw-import').addEventListener('click', function () {
+        dlgW.close();
+        if (window.MBBackup) window.MBBackup.importBackup();
+    });
+
+    /* Loader */
+    var loader = $('loader');
+    var started = Date.now();
+    var hidden = false;
+    function hideLoader() {
+        if (hidden) return;
+        hidden = true;
+        var wait = Math.max(0, 450 - (Date.now() - started));
+        setTimeout(function () {
+            loader.classList.add('done');
+            if (!safeGet('mbarcade.onboarded')) {
+                try { dlgW.showModal(); } catch (e) {}
+            }
+        }, wait);
+    }
+    if (document.readyState === 'complete') hideLoader();
+    else window.addEventListener('load', hideLoader);
+    setTimeout(hideLoader, 4000); // safety net if load stalls
+
+    /* Privacy and Terms (built into the page) */
+    var dlgP = $('dlg-privacy'), dlgT = $('dlg-terms');
+    function openLegal(which) {
+        if (dlgN.open) dlgN.close();
+        var d = which === 'terms' ? dlgT : dlgP;
+        if (!d.open) d.showModal();
+        d.querySelector('.notes').scrollTop = 0;
+    }
+    $('privacy-btn').addEventListener('click', function () { openLegal('privacy'); });
+    $('terms-btn').addEventListener('click', function () { openLegal('terms'); });
+    $('terms-to-privacy').addEventListener('click', function () { dlgT.close(); openLegal('privacy'); });
+    $('dp-close').addEventListener('click', function () { dlgP.close(); });
+    $('dt-close').addEventListener('click', function () { dlgT.close(); });
+    if (location.hash === '#privacy') openLegal('privacy');
+    else if (location.hash === '#terms') openLegal('terms');
+    $('pv-clear').addEventListener('click', function () {
+        askConfirm({
+            title: 'Clear everything saved on this device?',
+            body: 'This erases your settings, all-time stats and the remembered backup location, then reloads the page. Backup files you saved yourself are not touched.',
+            ok: 'Clear and reload', danger: true
+        }).then(function (go) {
+            if (!go) return;
+            function done() {
+                ['theme', 'mode', 'sound', 'mbarcade.v1', 'mbarcade.onboarded', 'cookie-notice'].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+                $('pv-status').textContent = 'Saved data cleared. Reloading…';
+                setTimeout(function () { location.reload(); }, 400);
+            }
+            (window.MBBackup ? window.MBBackup.wipe() : Promise.resolve()).then(done, done);
+        });
+    });
+
+    window.MBApp = { setTheme: setTheme, applyTheme: applyTheme, renderSound: renderSound, safeGet: safeGet, safeSet: safeSet };
+})();
+</script>
+
+<script>
+/* DATA MENU: backups, import/export, remembered save location */
+(function () {
+    var APP = 'mbarcade.online';
+    var K_LAST = 'mbarcade.lastBackup', K_JSON = 'mbarcade.fileJson', K_CSV = 'mbarcade.fileCsv';
+    var $ = function (id) { return document.getElementById(id); };
+    var App = window.MBApp;
+
+    /* ---------- remembered file handles (IndexedDB; handles can't live in localStorage) ---------- */
+    function idb() {
+        return new Promise(function (res, rej) {
+            if (!window.indexedDB) return rej(new Error('no idb'));
+            var r = indexedDB.open('mbarcade', 1);
+            r.onupgradeneeded = function () { r.result.createObjectStore('handles'); };
+            r.onsuccess = function () { res(r.result); };
+            r.onerror = function () { rej(r.error); };
+        });
+    }
+    function hGet(k) {
+        return idb().then(function (db) {
+            return new Promise(function (res, rej) {
+                var q = db.transaction('handles').objectStore('handles').get(k);
+                q.onsuccess = function () { res(q.result || null); };
+                q.onerror = function () { rej(q.error); };
+            });
+        }).catch(function () { return null; });
+    }
+    function hSet(k, v) {
+        return idb().then(function (db) {
+            return new Promise(function (res, rej) {
+                var tx = db.transaction('handles', 'readwrite');
+                tx.objectStore('handles').put(v, k);
+                tx.oncomplete = function () { res(); };
+                tx.onerror = function () { rej(tx.error); };
+            });
+        }).catch(function () {});
+    }
+    function hClear() {
+        return idb().then(function (db) {
+            return new Promise(function (res) {
+                var tx = db.transaction('handles', 'readwrite');
+                tx.objectStore('handles').clear();
+                tx.oncomplete = res; tx.onerror = res;
+            });
+        }).catch(function () {});
+    }
+
+    var JSON_TYPES = [{ description: 'mbarcade.online backup (JSON)', accept: { 'application/json': ['.json'] } }];
+    var CSV_TYPES = [{ description: 'Spreadsheet (CSV)', accept: { 'text/csv': ['.csv'] } }];
+    function canPick() { return typeof window.showSaveFilePicker === 'function'; }
+    function p2(n) { return (n < 10 ? '0' : '') + n; }
+    function stamp() { var d = new Date(); return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()); }
+
+    function ensurePerm(h) {
+        var o = { mode: 'readwrite' };
+        return Promise.resolve(h.queryPermission ? h.queryPermission(o) : 'granted').then(function (s) {
+            if (s === 'granted') return true;
+            return h.requestPermission(o).then(function (r) { return r === 'granted'; });
+        }).catch(function () { return false; });
+    }
+    function writeTo(h, text) {
+        return h.createWritable().then(function (w) {
+            return w.write(text).then(function () { return w.close(); });
+        });
+    }
+    function download(name, text, mime) {
+        var b = new Blob([text], { type: mime });
+        var u = URL.createObjectURL(b);
+        var a = document.createElement('a');
+        a.href = u; a.download = name;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(u); }, 4000);
+    }
+
+    /* ---------- file contents ---------- */
+    function buildJSON() {
+        return JSON.stringify({
+            app: APP, format: 1, exportedAt: new Date().toISOString(),
+            settings: {
+                theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light',
+                sound: soundOn ? 'on' : 'off',
+                mode: App.safeGet('mode') || '8ball'
+            },
+            stats: Stats.snapshot()
+        }, null, 2);
+    }
+    function csvCell(v) {
+        var s = String(v);
+        if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;           // spreadsheet formula guard
+        if (/[",\n\r]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';
+        return s;
+    }
+    function buildCSV() {
+        var s = Stats.snapshot();
+        var rate = s['cards.draws'] ? Math.round(s['cards.correct'] / s['cards.draws'] * 100) + '%' : '';
+        var rows = [
+            ['Game', 'Stat', 'Value'],
+            ['8-Ball', 'Questions asked', s['ball.questions']],
+            ['8-Ball', 'Positive answers', s['ball.yes']],
+            ['8-Ball', 'Neutral answers', s['ball.maybe']],
+            ['8-Ball', 'Negative answers', s['ball.no']],
+            ['Red/Black', 'Cards drawn', s['cards.draws']],
+            ['Red/Black', 'Correct guesses', s['cards.correct']],
+            ['Red/Black', 'Accuracy', rate],
+            ['Red/Black', 'Best streak', s['cards.bestStreak']],
+            ['Red/Black', 'Decks finished', s['cards.decks']],
+            ['Roulette', 'Trigger pulls', s['roulette.pulls']],
+            ['Roulette', 'Safe clicks', s['roulette.survived']],
+            ['Roulette', 'Bangs', s['roulette.bangs']],
+            ['Roulette', 'Longest run', s['roulette.bestRun']],
+            ['Cee-Lo', 'Rolls', s['ceelo.rolls']],
+            ['Cee-Lo', 'Wins', s['ceelo.wins']],
+            ['Cee-Lo', 'Points set', s['ceelo.points']],
+            ['Cee-Lo', 'Busts', s['ceelo.busts']],
+            ['Cee-Lo', 'Best hand', s['ceelo.bestRank'] >= 0 ? s['ceelo.bestLabel'] : '']
+        ];
+        return '﻿' + rows.map(function (r) { return r.map(csvCell).join(','); }).join('\r\n') + '\r\n';
+    }
+
+    /* ---------- save logic ---------- */
+    function fileInfo(kind) {
+        return kind === 'json'
+            ? { text: buildJSON, name: 'mbarcade-backup.json', dated: function () { return 'mbarcade-backup-' + stamp() + '.json'; }, types: JSON_TYPES, mime: 'application/json', key: K_JSON }
+            : { text: buildCSV, name: 'mbarcade-data.csv', dated: function () { return 'mbarcade-data-' + stamp() + '.csv'; }, types: CSV_TYPES, mime: 'text/csv;charset=utf-8', key: K_CSV };
+    }
+    /* Returns {ok, name, fallback} or {ok:false, aborted} */
+    function saveFile(kind, forcePick) {
+        var f = fileInfo(kind), text = f.text();
+        if (!canPick()) {
+            var n = f.dated(); download(n, text, f.mime);
+            return Promise.resolve({ ok: true, name: n, fallback: true });
+        }
+        function pick() {
+            return hGet(kind === 'csv' ? 'csv' : 'json').then(function (prev) {
+                var o = { suggestedName: f.name, types: f.types };
+                if (prev) o.startIn = prev;
+                return hGet('json').then(function (j) {
+                    if (!prev && j) o.startIn = j;
+                    return window.showSaveFilePicker(o);
+                });
+            });
+        }
+        function useStored() {
+            if (forcePick) return Promise.resolve(null);
+            return hGet(kind).then(function (h) {
+                if (!h) return null;
+                return ensurePerm(h).then(function (ok) { return ok ? h : null; });
+            });
+        }
+        function attempt(allowRepick) {
+            return useStored().then(function (h) { return h || pick(); }).then(function (h) {
+                return writeTo(h, text).then(function () {
+                    return hSet(kind, h).then(function () {
+                        App.safeSet(f.key, h.name);
+                        return { ok: true, name: h.name };
+                    });
+                });
+            }).catch(function (e) {
+                if (e && e.name === 'AbortError') return { ok: false, aborted: true };
+                if (allowRepick && e && (e.name === 'NotFoundError' || e.name === 'InvalidStateError' || e.name === 'NoModificationAllowedError')) {
+                    forcePick = true; return attempt(false);     // saved file moved or deleted: choose again
+                }
+                var n = f.dated(); download(n, text, f.mime);    // picker blocked (e.g. embedded preview)
+                return { ok: true, name: n, fallback: true };
+            });
+        }
+        return attempt(true);
+    }
+    function refreshCsvQuietly() {
+        if (!canPick() || !App.safeGet(K_CSV)) return Promise.resolve(false);
+        return hGet('csv').then(function (h) {
+            if (!h) return false;
+            return ensurePerm(h).then(function (ok) {
+                if (!ok) return false;
+                return writeTo(h, buildCSV()).then(function () { return true; }, function () { return false; });
+            });
+        });
+    }
+    function markBackup() { App.safeSet(K_LAST, String(Date.now())); render(); }
+
+    var busy = false;
+    function exportJSON(forcePick) {
+        if (busy) return Promise.resolve();
+        busy = true;
+        return saveFile('json', !!forcePick).then(function (r) {
+            if (r.ok) {
+                markBackup();
+                toast(r.fallback ? 'Backup downloaded: ' + r.name : 'Backup saved to ' + r.name);
+            }
+        }).then(function () { busy = false; }, function () { busy = false; });
+    }
+    function exportCSV() {
+        if (busy) return Promise.resolve();
+        busy = true;
+        return saveFile('csv', true).then(function (r) {
+            if (r.ok) { render(); toast(r.fallback ? 'CSV downloaded: ' + r.name : 'CSV saved to ' + r.name); }
+        }).then(function () { busy = false; }, function () { busy = false; });
+    }
+    function saveNow() {
+        if (busy) return Promise.resolve();
+        var guard = (Stats.total() === 0 && App.safeGet(K_JSON))
+            ? askConfirm({ title: 'Overwrite backup with empty stats?', body: 'You have no stats on this device right now. Saving will replace ' + App.safeGet(K_JSON) + ' with an empty backup.', ok: 'Overwrite', danger: true })
+            : Promise.resolve(true);
+        return guard.then(function (go) {
+            if (!go) return;
+            busy = true;
+            return saveFile('json', false).then(function (r) {
+                if (!r.ok) return;
+                markBackup();
+                if (r.fallback) { toast('Backup downloaded: ' + r.name); return; }
+                return refreshCsvQuietly().then(function (csv) {
+                    toast('Backup saved to ' + r.name + (csv ? ' (and CSV)' : ''));
+                });
+            }).then(function () { busy = false; }, function () { busy = false; });
+        });
+    }
+
+    /* ---------- import ---------- */
+    function applyImport(o) {
+        Stats.replace(o.stats);
+        var s = o.settings || {};
+        if (s.theme === 'light' || s.theme === 'dark') App.setTheme(s.theme);
+        if (s.sound === 'on' || s.sound === 'off') { soundOn = s.sound === 'on'; App.safeSet('sound', s.sound); App.renderSound(); }
+        if (/^(8ball|cards|roulette|ceelo)$/.test(s.mode || '')) switchMode(s.mode);
+        render();
+    }
+    function handleText(text) {
+        var o;
+        try { o = JSON.parse(text); } catch (e) { toast('That file is not valid JSON, so nothing was changed.', true); return; }
+        if (!o || o.app !== APP || typeof o.stats !== 'object' || !o.stats) {
+            toast('That is not an mbarcade.online backup, so nothing was changed.', true); return;
+        }
+        var incoming = Stats.clean(o.stats);
+        var plays = incoming['ball.questions'] + incoming['cards.draws'] + incoming['roulette.pulls'] + incoming['ceelo.rolls'];
+        var when = o.exportedAt ? new Date(o.exportedAt) : null;
+        var whenTxt = when && !isNaN(when) ? when.toLocaleString() : 'an unknown date';
+        askConfirm({
+            title: 'Replace stats with this backup?',
+            body: 'Backup from ' + whenTxt + ' with ' + plays.toLocaleString() + ' plays. This device currently has ' + Stats.total().toLocaleString() + '. Importing replaces this device\'s all-time stats (it never adds to them, so importing twice is safe).',
+            ok: 'Replace'
+        }).then(function (go) {
+            if (!go) return;
+            applyImport({ stats: incoming, settings: o.settings });
+            toast('Backup imported');
+        });
+    }
+    var fileInput = $('import-file');
+    fileInput.addEventListener('change', function () {
+        var f = fileInput.files && fileInput.files[0];
+        fileInput.value = '';
+        if (!f) return;
+        f.text().then(handleText, function () { toast('Could not read that file.', true); });
+    });
+    function importBackup() {
+        if (typeof window.showOpenFilePicker !== 'function') { fileInput.click(); return; }
+        hGet('json').then(function (prev) {
+            var o = { types: JSON_TYPES, multiple: false };
+            if (prev) o.startIn = prev;
+            return window.showOpenFilePicker(o);
+        }).then(function (hs) {
+            return hs[0].getFile();
+        }).then(function (f) {
+            return f.text();
+        }).then(handleText, function (e) {
+            if (e && e.name === 'AbortError') return;
+            fileInput.click();                                   // picker blocked: use the plain file chooser
+        });
+    }
+
+    /* ---------- clear ---------- */
+    function clearAll() {
+        askConfirm({
+            title: 'Clear all data?',
+            body: 'This erases the all-time stats on this device and forgets the saved backup location. Your backup files are not touched. Theme and sound settings stay.',
+            ok: 'Clear all data', danger: true
+        }).then(function (go) {
+            if (!go) return;
+            Stats.clear();
+            [K_LAST, K_JSON, K_CSV].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+            hClear().then(function () { render(); toast('All data cleared'); });
+        });
+    }
+
+    /* ---------- "backed up last" status ---------- */
+    function ago(ts) {
+        var s = Math.max(0, (Date.now() - ts) / 1000);
+        if (s < 60) return 'just now';
+        var m = Math.floor(s / 60); if (m < 60) return m + (m === 1 ? ' minute ago' : ' minutes ago');
+        var h = Math.floor(m / 60); if (h < 24) return h + (h === 1 ? ' hour ago' : ' hours ago');
+        var d = Math.floor(h / 24); if (d < 60) return d + (d === 1 ? ' day ago' : ' days ago');
+        var mo = Math.floor(d / 30); return mo + ' months ago';
+    }
+    function render() {
+        var last = parseInt(App.safeGet(K_LAST) || '0', 10) || 0;
+        var has = Stats.total() > 0;
+        var warn = (last && Date.now() - last > 7 * 864e5) || (!last && has);
+        var chip = $('bk-chip');
+        $('bk-text').textContent = last ? 'Backed up ' + ago(last) : (has ? 'Never backed up' : 'No backup yet');
+        chip.classList.toggle('warn', !!warn);
+        chip.classList.toggle('idle', !last && !has);
+        $('data-dot').classList.toggle('on', !!warn);
+
+        var jn = App.safeGet(K_JSON), cn = App.safeGet(K_CSV);
+        var foot = $('dm-foot');
+        foot.textContent = '';
+        var b = document.createElement('div');
+        b.innerHTML = '<b></b>';
+        b.firstChild.textContent = last ? 'Last backup ' + ago(last) : 'No backup saved yet';
+        foot.appendChild(b);
+        var l2 = document.createElement('div');
+        if (!canPick()) {
+            l2.textContent = 'This browser saves backups to your Downloads folder with the date in the name.';
+        } else if (jn) {
+            l2.appendChild(document.createTextNode(jn + (cn ? ' and ' + cn : '') + ' in the folder you chose. '));
+            var ch = document.createElement('button');
+            ch.type = 'button'; ch.className = 'linkbtn'; ch.textContent = 'Change location…';
+            ch.addEventListener('click', function () { closeMenu(); exportJSON(true); });
+            l2.appendChild(ch);
+        } else {
+            l2.textContent = 'The first save asks where to put the file. After that, Save backup now overwrites it.';
+        }
+        foot.appendChild(l2);
+    }
+    Stats.onChange(render);
+    setInterval(render, 60000);
+    $('bk-chip').addEventListener('click', saveNow);
+
+    /* ---------- the menu itself ---------- */
+    var menu = $('data-menu'), btn = $('data-btn');
+    function items() { return Array.prototype.slice.call(menu.querySelectorAll('.dm-item')); }
+    function openMenu() {
+        render();
+        menu.classList.remove('hidden');
+        menu.style.top = (btn.getBoundingClientRect().bottom + 6) + 'px';
+        btn.setAttribute('aria-expanded', 'true');
+        items()[0].focus();
+    }
+    function closeMenu(refocus) {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        if (refocus) btn.focus();
+    }
+    btn.addEventListener('click', function () { menu.classList.contains('hidden') ? openMenu() : closeMenu(); });
+    document.addEventListener('click', function (e) {
+        if (!menu.classList.contains('hidden') && !e.target.closest('#data-menu') && !e.target.closest('#data-btn')) closeMenu();
+    });
+    window.addEventListener('resize', function () { if (!menu.classList.contains('hidden')) closeMenu(); });
+    menu.addEventListener('keydown', function (e) {
+        var its = items(), i = its.indexOf(document.activeElement);
+        if (e.key === 'ArrowDown') { e.preventDefault(); its[(i + 1) % its.length].focus(); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); its[(i - 1 + its.length) % its.length].focus(); }
+        else if (e.key === 'Home') { e.preventDefault(); its[0].focus(); }
+        else if (e.key === 'End') { e.preventDefault(); its[its.length - 1].focus(); }
+        else if (e.key === 'Escape') { e.preventDefault(); closeMenu(true); }
+        else if (e.key === 'Tab') { closeMenu(); }
+    });
+    menu.addEventListener('click', function (e) {
+        var it = e.target.closest('.dm-item');
+        if (!it) return;
+        closeMenu();
+        var a = it.dataset.act;
+        if (a === 'save') saveNow();
+        else if (a === 'export-json') exportJSON(true);
+        else if (a === 'export-csv') exportCSV();
+        else if (a === 'import') importBackup();
+        else if (a === 'clear') clearAll();
+    });
+    document.addEventListener('keydown', function (e) {
+        if ((e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && (e.key === 's' || e.key === 'S')) {
+            e.preventDefault();
+            saveNow();
+        }
+    });
+
+    Stats.render();
+    render();
+    function wipe() {
+        Stats.clear();
+        [K_LAST, K_JSON, K_CSV].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+        return hClear();
+    }
+    window.MBBackup = { importBackup: importBackup, saveNow: saveNow, wipe: wipe };
+})();
+</script>
+
+</body>
+</html>
